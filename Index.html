@@ -19,7 +19,19 @@
 	<!--<script type="text/javascript" src="extjs/ext-all.js"></script>-->
 	<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
 	<script type="text/javascript" src="js/jquery-ui-1.8.20.custom.min.js"></script>
-	<script type="text/javascript" src="js/AppService.js"></script>
+	<script type="text/javascript" src="js/app/Config.js"></script>
+	<script type="text/javascript" src="js/app/AppService.js"></script>
+	<script type="text/javascript">
+		/** Boot strap. */
+		$(function ()
+		{
+			$(window).bind("load", function ()
+			{
+				$(SOS.AppService.Init);
+			});
+		});
+
+	</script>
 
 </head>
 <body>
