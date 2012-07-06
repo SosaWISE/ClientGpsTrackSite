@@ -50,7 +50,7 @@ Ext.define("SOS.AppService",
 
 		/** Execute ajax. */
 		$.ajax({
-			url: SOS.Config.AuthServiceUrl + "SosStart"
+			url: SOS.Config.AuthServiceUrl() + "SosStart"
 			, data: { szApplicationToken: "SOS_GPS_CLNT" }
 			, type: "GET"
 			, dataType: "jsonp"
@@ -83,7 +83,7 @@ Ext.define("SOS.AppService",
 		}
 		/** Execute ajax. */
 		$.ajax({
-			url: SOS.Config.AuthServiceUrl + "SosWiseCrmAuthenticate"
+			url: SOS.Config.AuthServiceUrl() + "SosWiseCrmAuthenticate"
 			, data: {
 				lSessionId: SOS.AppService.SessionID
 				, lDealerId: dealerId

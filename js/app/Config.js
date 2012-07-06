@@ -10,7 +10,16 @@ Ext.ns('SOS');
 Ext.define("SOS.Config",
 {
 	singleton: true
-//	, RestURL: "//localhost:50243/" // Development server.
-	, RestURL: "//www.freedomsos.com/"
-	, AuthServiceUrl: "//www.freedomsos.com/" + "AuthSrv/"
+	, RestURL: "//localhost:50243/" // Development server.
+//	, RestURL: "//www.freedomsos.com/"
+
+	, AuthServiceUrl: function()
+	{
+		return SOS.Config.RestURL + "AuthSrv/";
+	}
+
+	, ClientGpsTrackSrvUrl: function()
+	{
+		return SOS.Config.RestURL + "ClientGpsTrackSrv/";
+	}
 });
