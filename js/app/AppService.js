@@ -13,17 +13,52 @@ Ext.define("SOS.AppService",
 	singleton: true
 
 	/*******************************************************************************************************************
+	 *******************************************************************************************************************
 	 * Member Variables
+	 *******************************************************************************************************************
 	 ******************************************************************************************************************/
 	, SessionID: null
 
+	, TemplateFiles: []
+
 	/*******************************************************************************************************************
+	 *******************************************************************************************************************
 	 * Member functions
+	 *******************************************************************************************************************
 	 ******************************************************************************************************************/
 	, Init: function()
 	{
 		$("div.btnInformation").bind("click", SOS.AppService.LoginUser);
-		SOS.AppService.SessionStart();
+
+		$.when(SOS.AppService.SessionStart())
+			.done(SOS.AppService.LoadExtFiles);
+	}
+
+	/*******************************************************************************************************************
+	 * Loads external files from the app/Views folder.
+	 ******************************************************************************************************************/
+	, LoadExtFiles: function ()
+	{
+		/** Initialize. */
+		function LoadFileView(viewName)
+		{
+			return $.get("js/app/Views/" + viewName, function(data) {
+				/** Initialize. */
+				//var templateType = viewName.match(/<!-- TemplateId: raw MdlDlgLoginForm.html -->/g);
+
+				SOS.AppService.TemplateFiles[viewName] = data;
+				console.log('Load was performed.', data);
+			});
+		}
+
+		/** Load all files. */
+		$.when(
+			LoadFileView("MdlDlgLoginForm.html")
+		).then(function(){
+				console.log("Finished the loading of templates");
+				var oLoginForm = new SOS.Modals.LoginForm();
+				oLoginForm.show();
+			});
 	}
 
 	, LoginUser: function()
@@ -41,7 +76,7 @@ Ext.define("SOS.AppService",
 		{
 			console.log("SessionStart: Made it successfully", oResponse);
 			SOS.AppService.SessionID = oResponse.Value.SessionId;
-			alert("Successfully began a session with SessionID of '" + oResponse.Value.SessionId + "'");
+			//alert("Successfully began a session with SessionID of '" + oResponse.Value.SessionId + "'");
 		}
 		function fxFailure(jxHdr)
 		{
@@ -49,7 +84,7 @@ Ext.define("SOS.AppService",
 		}
 
 		/** Execute ajax. */
-		$.ajax({
+		return $.ajax({
 			url: SOS.Config.AuthServiceUrl() + "SosStart"
 			, data: { szApplicationToken: "SOS_GPS_CLNT" }
 			, type: "GET"

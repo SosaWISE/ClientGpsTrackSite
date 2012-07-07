@@ -1,0 +1,17 @@
+/** Login form. */
+div.mdlLoginFormMain {
+	/** Size, dim, and pos. */
+	width: 250px;
+	height: 250px;
+	padding: 20px;
+
+	/** appearance. */
+	background-color: white;
+}
+
+div.btns {
+	float: right;
+}
+div.btns a { text-decoration: underline; }
+div.btns a:hover { text-decoration: none; cursor: pointer; }
+
