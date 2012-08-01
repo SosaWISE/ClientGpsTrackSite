@@ -1,0 +1,22 @@
+<!-- TemplateId: raw MdlDlgLoginForm.html -->
+<div class="mdlLoginFormMain">
+	This is the SessionID: {SessionID}
+
+	<div style="float: right">
+		<fieldset>
+			<label class="username">
+				Username:
+				<br /><input id="txtUsername" type="text" onkeydown="if (event.keyCode == 13) document.getElementById('btnSubmit').click()">
+			</label>
+			<label class="password">
+				Password:
+				<br /><input id="txtPassword" type="password" onkeydown="if (event.keyCode == 13) document.getElementById('btnSubmit').click()">
+			</label>
+			<div class="btns">
+				<a class="button" id="btnReset" data-type="reset">Reset</a>
+				<a class="button" id="btnSubmit" data-type="submit">Submit</a>
+			</div>
+		</fieldset>
+	</div>
+
+</div>
