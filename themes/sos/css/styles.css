@@ -1,3 +1,15 @@
+/** cf allows the div to show all floating divs inside of it. */
+.cf:before,
+.cf:after {
+	content:"";
+	display:table;
+}
+.cf:after {
+	clear:both;
+}
+.cf {
+	zoom:1; /* For IE 6/7 (trigger hasLayout) */
+}
 body {
 	border-width: 0;
 	margin: 0;
@@ -44,6 +56,17 @@ div.mainMenuDiv {
 	width: 56px; height:712px;
 	background-color: #e8eaed;
 	display: inline-block;
+	float: left;
+	position: relative;
+}
+
+div.mainBodyDiv {
+	width: 964px;
+	height: 710px;
+	display: inline-block;
+	/*background-color: yellow;*/
+	overflow: hidden;
+
 }
 
 /** Main Menu Buttons. */
@@ -102,8 +125,11 @@ div.btnHomeSecurity:hover {
 /** |- Properties */
 div.btnProperties {
 	background: transparent url('../img/Buttons/settings.png') no-repeat;
-	top: 264px;
 }
 div.btnProperties:hover {
 	background: transparent url('../img/Buttons/settings_hover.png') no-repeat;
+}
+div.deviceList {
+	min-height: 544px;
+	min-width: 56px;
 }

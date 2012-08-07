@@ -90,6 +90,12 @@ Ext.define("SOS.Modals.LoginForm",
 				, SOS.Services.ClientGpsTrack.Gender
 				, SOS.Services.ClientGpsTrack.PhoneHome
 			));
+
+			/** Create device list. */
+			/** Init device list. */
+			SOS.Controllers.Devices.Init({CustomerMasterFileID: oResponse.Value.CustomerMasterFileId})
+
+			/** Close modal and instance. */
 			e.data.close();
 			e.data.destroy();
 		}

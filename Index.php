@@ -15,6 +15,7 @@
 <head>
 	<title>SS Client Tracker</title>
 	<link rel="stylesheet" href="themes/<?php echo $theme; ?>/css/styles.css">
+	<link rel="stylesheet" href="css/modals.css" />
 
 	<!--[if lt IE 7]>
 	<div class='aligncenter'><a href="http://www.microsoft.com/windows/internet-explorer/default.aspx?ocid=ie6_countdown_bannercode"><img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" alt="" border="0"></a></div>
@@ -30,21 +31,49 @@
 	<!--<script type="text/javascript" src="extjs/ext-all.js"></script>-->
 	<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
 	<script type="text/javascript" src="js/jquery-ui-1.8.20.custom.min.js"></script>
+	<script type="text/javascript" src="js/app/Config.js"></script>
+	<script type="text/javascript" src="js/app/AppService.js"></script>
+	<script type="text/javascript" src="js/app/Services/ClientGpsTrack.js"></script>
+	<script type="text/javascript" src="js/app/Modals/LoginForm.js"></script>
+	<!-- START Models-->
+	<script type="text/javascript" src="js/app/Models/DeviceModel.js"></script>
+	<!--   END Models-->
+	<!-- START Controllers -->
+	<script type="text/javascript" src="js/app/Controllers/Devices.js"></script>
+	<!--   END Controllers -->
+	<script type="text/javascript">
+		/** Boot strap. */
+		$(function ()
+		{
+			$(window).bind("load", function ()
+			{
+				$(SOS.AppService.Init);
+			});
+		});
+
+	</script>
 
 </head>
 <body>
-	<div class="mainRootDiv">
+	<div class="mainRootDiv cf">
 		<div class="mainHeaderDiv">
 			<div class="ssLogo"><img src="themes/<?php echo $theme; ?>/img/SS_logo.png" alt="Security Sciences Logo" style="border-width: 0; width: 262px; height: 43px;"> </div>
+		</div>
+		<div class="mainBodyDiv">
+			Main Body
 		</div>
 		<div class="mainMenuDiv">
 			<div class="btnInformation btnMain"></div>
 			<div class="btnAlerts btnMain"></div>
-			<div class="btnMedicalTracker btnMain"></div>
-			<div class="btnKidTracker btnMain"></div>
-			<div class="btnCarTracker btnMain"></div>
-			<div class="btnPetTracker btnMain"></div>
-			<div class="btnHomeSecurity btnMain"></div>
+			<!-- START: Insert devices here. -->
+			<div class="deviceList">
+				<div class="btnMedicalTracker btnMain">001</div>
+				<div class="btnKidTracker btnMain"></div>
+				<div class="btnCarTracker btnMain"></div>
+				<div class="btnPetTracker btnMain"></div>
+				<div class="btnHomeSecurity btnMain"></div>
+			</div>
+			<!--   END: Insert devices here. -->
 			<div class="btnProperties btnMain"></div>
 		</div>
 	</div>
