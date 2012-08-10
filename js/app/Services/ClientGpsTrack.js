@@ -114,4 +114,42 @@ Ext.define("SOS.Services.ClientGpsTrack",
 		/** Return result. */
 		return jxHdr;
 	}
+
+	, GetDeviceListByCMFID: function (oParams, afxSuccess, afxFailure)
+	{
+		/** Initialize. */
+		var oData = {};
+		function fxSuccess(oResponse) { if (afxSuccess) afxSuccess(oResponse); }
+		function fxFailure(oResponse) { if (afxFailure) afxFailure(oResponse); }
+
+		/** Check arguments. */
+		if (oParams === undefined)
+		{
+			alert("Please pass oParams");
+			return;
+		}
+		if (oParams.CustomerMasterFileID === undefined)
+		{
+			alert("Please pass a CMFID.");
+			return;
+		}
+
+		/** Build arguments. */
+		oData.lCMFID = oParams.CustomerMasterFileID;
+
+		/** Execute call. */
+		var jxHdr = $.ajax({
+			url: SOS.Config.ClientGpsTrackSrvUrl() + "GetListOfDevicesByCMFID"
+			, data: oData
+			, type: "GET"
+			, dataType: "jsonp"
+			, contentType: 'application/json; charset=utf-8'
+			, jsonpCallback: "jsoncallback"
+			, success: fxSuccess
+			, error: fxFailure
+		});
+
+		/** Return header. */
+		return jxHdr;
+	}
 });

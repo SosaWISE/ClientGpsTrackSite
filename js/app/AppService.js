@@ -54,6 +54,8 @@ Ext.define("SOS.AppService",
 		/** Load all files. */
 		$.when(
 			LoadFileView("MdlDlgLoginForm.html")
+		).when (
+			LoadFileView("")
 		).then(function(){
 				console.log("Finished the loading of templates");
 				var oLoginForm = new SOS.Modals.LoginForm();
