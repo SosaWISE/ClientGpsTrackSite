@@ -22,7 +22,7 @@ Ext.define("SOS.Views.MainViewport",
 			, OrderPanel: 'OrderPanel'
 			, SettingPanel: 'SettingPanel'
 		}
-	},
+	}
 	/**   END Member Properties. */
 
 	/** START Member Functions. */

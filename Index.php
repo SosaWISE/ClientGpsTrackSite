@@ -34,7 +34,10 @@
 	<script type="text/javascript" src="js/app/Config.js"></script>
 	<script type="text/javascript" src="js/app/AppService.js"></script>
 	<script type="text/javascript" src="js/app/Services/ClientGpsTrack.js"></script>
+	<!-- START Modals -->
 	<script type="text/javascript" src="js/app/Modals/LoginForm.js"></script>
+	<script type="text/javascript" src="js/app/Modals/MdlDlgInfoForm.js"></script>
+	<!--   END Modals -->
 	<!-- START Models-->
 	<script type="text/javascript" src="js/app/Models/DeviceModel.js"></script>
 	<!--   END Models-->

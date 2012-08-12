@@ -16,7 +16,7 @@ Ext.define("SOS.Modals.LoginForm",
 	constructor: function(options)
 	{
 		/** Initialize. */
-		var me = this;
+		//var me = this;
 		options = options || {};
 		var tplCalendar = SOS.AppService.TemplateFiles['MdlDlgLoginForm.html'];
 
@@ -49,13 +49,13 @@ Ext.define("SOS.Modals.LoginForm",
 		this.callParent([config]);
 	},
 
-	OnAfterRender: function (e)
+	OnAfterRender: function (/**e*/)
 	{
 		console.log("Finished rendering the Modal Dialog Login Form.");
 		/** Initialize. */
 		var me = this;
 		me._viewContainer = Ext.getCmp("ModalLoginForm");
-		var frmLogin = Ext.getCmp("ModalLoginForm");
+		//var frmLogin = Ext.getCmp("ModalLoginForm");
 		var btnSubmit = $("#btnSubmit");
 
 		/** Bind events to buttons. */
@@ -93,7 +93,7 @@ Ext.define("SOS.Modals.LoginForm",
 
 			/** Create device list. */
 			/** Init device list. */
-			SOS.Controllers.Devices.Init({CustomerMasterFileID: oResponse.Value.CustomerMasterFileId})
+			SOS.Controllers.Devices.Init({CustomerMasterFileID: oResponse.Value.CustomerMasterFileId});
 
 			/** Close modal and instance. */
 			e.data.close();
@@ -104,7 +104,8 @@ Ext.define("SOS.Modals.LoginForm",
 			console.log("There was an error", jxHdr);
 		}
 
-		var oDef = SOS.Services.ClientGpsTrack.Authenticate(sUsername, sPassword, fxSuccess, fxFailure)
+		var oDef = SOS.Services.ClientGpsTrack.Authenticate(sUsername, sPassword, fxSuccess, fxFailure);
+		console.log("oDef:", oDef);
 	}
 });
 

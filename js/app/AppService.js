@@ -28,7 +28,8 @@ Ext.define("SOS.AppService",
 	 ******************************************************************************************************************/
 	, Init: function()
 	{
-		$("div.btnInformation").bind("click", SOS.AppService.LoginUser);
+		//$("div.btnInformation").bind("click", SOS.AppService.LoginUser);
+		$("div.btnInformation").bind("click", SOS.Modals.InfoForm.Show);
 
 		$.when(SOS.AppService.SessionStart())
 			.done(SOS.AppService.LoadExtFiles);
@@ -42,20 +43,30 @@ Ext.define("SOS.AppService",
 		/** Initialize. */
 		function LoadFileView(viewName)
 		{
-			return $.get("js/app/Views/" + viewName, function(data) {
+//			return $.get("js/app/Views/" + viewName, function(data) {
+//				/** Initialize. */
+//					//var templateType = viewName.match(/<!-- TemplateId: raw MdlDlgLoginForm.html -->/g);
+//
+//				SOS.AppService.TemplateFiles[viewName] = data;
+//				console.log('Load was performed.', data);
+//			});
+			return $.ajax({
+				url: "js/app/Views/" + viewName,
+				dataType: "text",
+				success: function(data) {
 				/** Initialize. */
-				//var templateType = viewName.match(/<!-- TemplateId: raw MdlDlgLoginForm.html -->/g);
+					//var templateType = viewName.match(/<!-- TemplateId: raw MdlDlgLoginForm.html -->/g);
 
 				SOS.AppService.TemplateFiles[viewName] = data;
 				console.log('Load was performed.', data);
-			});
+			}});
 		}
 
 		/** Load all files. */
 		$.when(
 			LoadFileView("MdlDlgLoginForm.html")
-		).when (
-			LoadFileView("")
+			, LoadFileView("MdlDlgInfoForm.html")
+			, LoadFileView("PaneMainGPSMedical.html")
 		).then(function(){
 				console.log("Finished the loading of templates");
 				var oLoginForm = new SOS.Modals.LoginForm();
@@ -134,6 +145,5 @@ Ext.define("SOS.AppService",
 			, success: fxSuccess
 			, error: fxFailure
 		});
-
 	}
 });
