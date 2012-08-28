@@ -44,6 +44,10 @@
 	<!-- START Controllers -->
 	<script type="text/javascript" src="js/app/Controllers/Devices.js"></script>
 	<!--   END Controllers -->
+	<!-- START Google Maps Api -->
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false" ></script>
+	<script type="text/javascript" src="js/Gps/maps.js"></script>
+	<!--   END Google Maps Api -->
 	<script type="text/javascript">
 		/** Boot strap. */
 		$(function ()
@@ -62,7 +66,7 @@
 		<div class="mainHeaderDiv">
 			<div class="ssLogo"><img src="themes/<?php echo $theme; ?>/img/SS_logo.png" alt="Security Sciences Logo" style="border-width: 0; width: 262px; height: 43px;"> </div>
 		</div>
-		<div class="mainBodyDiv">
+		<div id="map_canvas" class="mainBodyDiv">
 			Main Body
 		</div>
 		<div class="mainMenuDiv">

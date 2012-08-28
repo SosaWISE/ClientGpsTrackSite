@@ -19,12 +19,12 @@ Ext.define("SOS.Controllers.Devices",
 	, DeviceListEl: {}
 	, CustomerMasterFileID: null
 	, DeviceElList: {
-			Medical: '<div data-id="dId-{0}" class="btnMedicalTracker btnMain">{1}</div>',
-			Kid:     '<div data-id="dId-{0}" class="btnKidTracker btnMain">{1}</div>',
-			Car:     '<div data-id="dId-{0}" class="btnCarTracker btnMain">{1}</div>',
-			Pet:     '<div data-id="dId-{0}" class="btnPetTracker btnMain">{1}</div>',
-			Home:    '<div data-id="dId-{0}" class="btnHomeSecurity btnMain">{1}</div>',
-			Exercise:'<div data-id="dId-{0}" class="btnExercise btnMain">{1}</div>'
+			Medical: '<div data-id="dId-{0}" data-idid="cId-{1}" class="btnMedicalTracker btnMain">{2}</div>',
+			Kid:     '<div data-id="dId-{0}" data-idid="cId-{1}" class="btnKidTracker btnMain">{2}</div>',
+			Car:     '<div data-id="dId-{0}" data-idid="cId-{1}" class="btnCarTracker btnMain">{2}</div>',
+			Pet:     '<div data-id="dId-{0}" data-idid="cId-{1}" class="btnPetTracker btnMain">{2}</div>',
+			Home:    '<div data-id="dId-{0}" data-idid="cId-{1}" class="btnHomeSecurity btnMain">{2}</div>',
+			Exercise:'<div data-id="dId-{0}" data-idid="cId-{1}" class="btnExercise btnMain">{2}</div>'
 		}
 	/**   END Member Properties. */
 
@@ -57,47 +57,91 @@ Ext.define("SOS.Controllers.Devices",
 			var sDevices = "";
 			$.each(oResponse.Value, function (nIndex, oItem)
 			{
+				/** Add to device list. */
+				SOS.Controllers.Devices.DeviceList[nIndex] = oItem;
+
 				/** Check to see what type of device it is. */
 				switch (oItem.PanelTypeId)
 				{
 					case "PERS-M":
 						sDevices += Ext.String.format(SOS.Controllers.Devices.DeviceElList.Medical
-							, oItem.AccountId, oItem.IndustryNumber);
+							, oItem.AccountId, oItem.CustomerID, oItem.IndustryNumber);
 						break;
 					case "PERS-C":
 						sDevices += Ext.String.format(SOS.Controllers.Devices.DeviceElList.Kid
-							, oItem.AccountId, oItem.IndustryNumber);
+							, oItem.AccountId, oItem.CustomerID, oItem.IndustryNumber);
 						break;
 					case "PERS-A":
 						sDevices += Ext.String.format(SOS.Controllers.Devices.DeviceElList.Kid
-							, oItem.AccountId, oItem.IndustryNumber);
+							, oItem.AccountId, oItem.CustomerID, oItem.IndustryNumber);
 						break;
 					case "PERS-P":
 						sDevices += Ext.String.format(SOS.Controllers.Devices.DeviceElList.Pet
-							, oItem.AccountId, oItem.IndustryNumber);
+							, oItem.AccountId, oItem.CustomerID, oItem.IndustryNumber);
 						break;
 					case "PERS-E":
 						sDevices += Ext.String.format(SOS.Controllers.Devices.DeviceElList.Exercise
-							, oItem.AccountId, oItem.IndustryNumber);
+							, oItem.AccountId, oItem.CustomerID, oItem.IndustryNumber);
 						break;
 					default:
 						sDevices += Ext.String.format(SOS.Controllers.Devices.DeviceElList.Home
-							, oItem.AccountId, oItem.IndustryNumber);
+							, oItem.AccountId, oItem.CustomerID, oItem.IndustryNumber);
 						break;
 				}
 			});
 
-			debugger;
 			/** Build list of devices and show. */
 			SOS.Controllers.Devices.DeviceListEl.html(sDevices);
+
+			/** Bind events to buttons. */
+			$("div.btnMain", $("div.deviceList")).bind("click", SOS.Controllers.Devices.buttonClick);
 		}
 		function fxFailure(oResponse)
 		{
+			/** Initialize. */
 			console.log(oResponse);
 		}
 
 		/** Execute. */
 		SOS.Services.ClientGpsTrack.GetDeviceListByCMFID(oOptions, fxSuccess, fxFailure);
+	}
+
+	, buttonClick: function (e)
+	{
+		/** Initialize. */
+		var oEl = $(e.currentTarget);
+		var lAccountID = $(e.currentTarget).attr("data-id").replace("dId-", "");
+		var lCustomerId = $(e.currentTarget).attr("data-idid").replace("cId-", "");
+
+		console.log(oEl, lAccountID, lCustomerId);
+
+		/**
+		 * Call server to get information. */
+		// ** Initialize.
+		var oOptions = {
+			AccountID: lAccountID
+			, CustomerID: lCustomerId
+		};
+		function fxSuccess(oResponse) {
+			if (oResponse.Code !== 0)
+			{
+				alert("The following error was encountered: \n" + oResponse.Message);
+				return;
+			}
+			console.log(oResponse);
+			/** Load Google map. */
+			var oOptions = {
+				latitude: -111.67569100000003
+				, longitude: 40.31907001347657
+			};
+			debugger;
+			SOS.Gps.Maps.initialize(oOptions);
+		}
+		function fxFailure (oResponse){
+			console.log(oResponse);
+		}
+
+		SOS.Services.ClientGpsTrack.GetDeviceDetails(oOptions, fxSuccess, fxFailure);
 	}
 	/**   END Member Functions. */
 });

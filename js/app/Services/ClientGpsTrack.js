@@ -152,4 +152,49 @@ Ext.define("SOS.Services.ClientGpsTrack",
 		/** Return header. */
 		return jxHdr;
 	}
+
+	, GetDeviceDetails: function (oParams, afxSuccess, afxFailure)
+	{
+		/** Initialize. */
+		var oData = {};
+		function fxSuccess(oResponse) { if (afxSuccess) afxSuccess(oResponse); }
+		function fxFailure(oResponse) { if (afxFailure) afxFailure(oResponse); }
+
+		/** Check arguments. */
+		if (oParams === undefined)
+		{
+			alert("Please pass oParams");
+			return;
+		}
+		if (oParams.AccountID === undefined)
+		{
+			alert("Please pass an AccountID.");
+			return;
+		}
+
+		if (oParams.CustomerID === undefined)
+		{
+			alert("Please pass a CustomerID.");
+			return;
+		}
+
+		/** Build arguments. */
+		oData.lAccountID = oParams.AccountID;
+		oData.lCustomerID = oParams.CustomerID;
+
+		/** Execute call. */
+		var jxHdr = $.ajax({
+			url: SOS.Config.ClientGpsTrackSrvUrl() + "GetDeviceDetails"
+			, data: oData
+			, type: "GET"
+			, dataType: "jsonp"
+			, contentType: 'application/json; charset=utf-8'
+			, jsonpCallback: "jsoncallback"
+			, success: fxSuccess
+			, error: fxFailure
+		});
+
+		/** Return header. */
+		return jxHdr;
+	}
 });

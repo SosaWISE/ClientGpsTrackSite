@@ -6,6 +6,9 @@
       <w>freedomsos</w>
       <w>jsoncallback</w>
       <w>jsonp</w>
+      <w>latlng</w>
+      <w>mapzoom</w>
+      <w>memeber</w>
       <w>pers</w>
     </words>
   </dictionary>
