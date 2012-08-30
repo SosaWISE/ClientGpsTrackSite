@@ -133,3 +133,16 @@ div.deviceList {
 	min-height: 544px;
 	min-width: 56px;
 }
+
+#map_canvas {
+	/*height: 710px;*/
+	/*height: 690px;*/
+	height: 656px;
+	position: relative;
+}
+div.toolsMenu {
+	width: 964px;
+	height: 54px;
+	background-color: #9acd32; /** yellowgreen */
+	position: relative;
+}

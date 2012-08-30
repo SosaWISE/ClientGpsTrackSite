@@ -134,7 +134,7 @@ Ext.define("SOS.Controllers.Devices",
 				latitude: -111.67569100000003
 				, longitude: 40.31907001347657
 			};
-			debugger;
+
 			SOS.Gps.Maps.initialize(oOptions);
 		}
 		function fxFailure (oResponse){

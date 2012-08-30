@@ -1,15 +1,42 @@
 <component name="ProjectDictionaryState">
   <dictionary name="Andres Sosa">
     <words>
+      <w>circleoptions</w>
+      <w>circlestyles</w>
       <w>clnt</w>
+      <w>closethis</w>
       <w>cmfid</w>
+      <w>createcirclestyleobject</w>
+      <w>createlinestyleobject</w>
+      <w>createmarkerstyleobject</w>
+      <w>createplacemarkobject</w>
+      <w>createpolygonstyleobject</w>
+      <w>cursorposition</w>
       <w>freedomsos</w>
       <w>jsoncallback</w>
       <w>jsonp</w>
       <w>latlng</w>
+      <w>lcur</w>
+      <w>maptypeid</w>
       <w>mapzoom</w>
+      <w>markerstyles</w>
       <w>memeber</w>
+      <w>mousemove</w>
+      <w>nemarker</w>
+      <w>newstart</w>
+      <w>nextshape</w>
+      <w>pcur</w>
       <w>pers</w>
+      <w>placemarks</w>
+      <w>plmcur</w>
+      <w>polygonoptions</w>
+      <w>polygonstuff</w>
+      <w>polygonstyles</w>
+      <w>polylineoptions</w>
+      <w>polylinestyles</w>
+      <w>setstart</w>
+      <w>showthis</w>
+      <w>startpoint</w>
     </words>
   </dictionary>
 </component>

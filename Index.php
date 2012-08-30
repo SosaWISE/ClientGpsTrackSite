@@ -66,8 +66,22 @@
 		<div class="mainHeaderDiv">
 			<div class="ssLogo"><img src="themes/<?php echo $theme; ?>/img/SS_logo.png" alt="Security Sciences Logo" style="border-width: 0; width: 262px; height: 43px;"> </div>
 		</div>
-		<div id="map_canvas" class="mainBodyDiv">
-			Main Body
+		<div class="mainBodyDiv">
+			<div id="map_canvas">Maps Goes Here</div>
+			<div class="toolsMenu cf">
+				<div class="btnMain">Circle</div>
+				<div class="btnMain"></div>
+				<div id="devOptions" class="devOptions" style="position:absolute; bottom:10px; right:10px;">
+					<select id="toolchoice" name="toolchoice" style="border:1px solid #000000;" onchange="SOS.Gps.Maps.setTool();">
+						<option value="3">Rectangle</option>
+						<option value="4" selected="">Circle</option>
+					</select>
+					<select id="overPos">
+						<option>LngLat mousemove</option>
+						<option selected="selected">LatLng mousemove</option>
+					</select>
+				</div>
+			</div>
 		</div>
 		<div class="mainMenuDiv">
 			<div class="btnInformation btnMain"></div>

@@ -10,7 +10,8 @@ Ext.ns('SOS');
 Ext.define("SOS.Config",
 {
 	singleton: true
-	, RestURL: "//localhost:50243/" // Development server.
+//	, RestURL: "//localhost:50243/" // Development server.
+	, RestURL: "//sos.corp2.local/" // Stage Environment.
 //	, RestURL: "//www.freedomsos.com/"
 
 	, AuthServiceUrl: function()
