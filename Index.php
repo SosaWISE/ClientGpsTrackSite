@@ -69,8 +69,9 @@
 		<div class="mainBodyDiv">
 			<div id="map_canvas">Maps Goes Here</div>
 			<div class="toolsMenu cf">
-				<div class="btnMain">Circle</div>
-				<div class="btnMain"></div>
+				<div class="btnMain btnBullsEye"></div>
+				<div class="btnMain btnCircle"></div>
+				<div class="btnMain btnPolygon"></div>
 				<div id="devOptions" class="devOptions" style="position:absolute; bottom:10px; right:10px;">
 					<select id="toolchoice" name="toolchoice" style="border:1px solid #000000;" onchange="SOS.Gps.Maps.setTool();">
 						<option value="3">Rectangle</option>
@@ -88,11 +89,11 @@
 			<div class="btnAlerts btnMain"></div>
 			<!-- START: Insert devices here. -->
 			<div class="deviceList">
-				<div class="btnMedicalTracker btnMain">001</div>
-				<div class="btnKidTracker btnMain"></div>
-				<div class="btnCarTracker btnMain"></div>
-				<div class="btnPetTracker btnMain"></div>
-				<div class="btnHomeSecurity btnMain"></div>
+<!--				<div class="btnMedicalTracker btnMain"></div>-->
+<!--				<div class="btnKidTracker btnMain"></div>-->
+<!--				<div class="btnCarTracker btnMain"></div>-->
+<!--				<div class="btnPetTracker btnMain"></div>-->
+<!--				<div class="btnHomeSecurity btnMain"></div>-->
 			</div>
 			<!--   END: Insert devices here. -->
 			<div class="btnProperties btnMain"></div>
