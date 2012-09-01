@@ -87,6 +87,12 @@ Ext.define("SOS.AppService",
 		/** Initialize. */
 		function fxSuccess(oResponse)
 		{
+			if (oResponse.Code !== 0)
+			{
+				alert(oResponse.Message);
+				return;
+			}
+
 			console.log("SessionStart: Made it successfully", oResponse);
 			SOS.AppService.SessionID = oResponse.Value.SessionId;
 			//alert("Successfully began a session with SessionID of '" + oResponse.Value.SessionId + "'");

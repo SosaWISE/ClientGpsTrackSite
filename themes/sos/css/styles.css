@@ -129,6 +129,16 @@ div.btnProperties {
 div.btnProperties:hover {
 	background: transparent url('../img/Buttons/settings_hover.png') no-repeat;
 }
+
+div.btnToolBullsEye {
+	background: transparent url('../img/Buttons/bullsEye.png') no-repeat;
+}
+div.btnToolCircle {
+	background: transparent url('../img/Buttons/circle.png') no-repeat;
+}
+div.btnToolPolygon {
+	background: transparent url('../img/Buttons/polygon.png') no-repeat;
+}
 div.deviceList {
 	min-height: 544px;
 	min-width: 56px;
@@ -138,11 +148,72 @@ div.deviceList {
 	/*height: 710px;*/
 	/*height: 690px;*/
 	height: 656px;
-	position: relative;
+	/*position: relative;*/
+	width: 740px;
+	/*display: inline;*/
+	float: right;
+	background-color: cyan;
+}
+
+#devOptions {
+	display: inline;
+	float: right;
 }
 div.toolsMenu {
 	width: 964px;
 	height: 54px;
 	background-color: #9acd32; /** yellowgreen */
-	position: relative;
+	/*position: relative;*/
+	float: left;
+}
+div.menuGps {
+	background-color: beige;
+	width: 220px;
+	height: 656px;
+	display: initial;
+	float: left;
+	padding: 5px;
+	box-sizing:border-box;
+	-moz-box-sizing:border-box; /* Firefox */
+	-webkit-box-sizing:border-box; /* Safari */}
+
+/** Events Table. */
+table.listTable {
+	border-collapse: collapse;
+	width: 100%;
+	/*display: inline-table;*/
+	/*padding: 10px 5px;*/
+	/*margin: 10px 5px;*/
+	/*clear: both;*/
+}
+div.menuGps th {
+	font-size: 12px;
+	font-family: Arial;
+}
+div.menuGps tr.trNormal, div.menuGps tr.trAlt {
+	font-size: 11px;
+	font-family: helvetica;
+	border: solid 1px;
+}
+
+div.menuGps tr.trNormal td, div.menuGps tr.trAlt td {
+	border: solid 1px;
+}
+
+div.menuGps tr.trNormal {
+	background-color: #87cefa;
+}
+div.menuGps tr.trAlt {
+	background-color: #b0c4de;
+}
+
+div.menuGps td.rowPointer {
+	background-image: url('/themes/sos/img/rowPointer.png');
+	background-repeat: no-repeat;
+	min-width: 3px;
+	min-height: 34px;
+}
+td.rowSpacer {
+	min-height: 2px;
+	background-color: black;
 }

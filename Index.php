@@ -67,12 +67,109 @@
 			<div class="ssLogo"><img src="themes/<?php echo $theme; ?>/img/SS_logo.png" alt="Security Sciences Logo" style="border-width: 0; width: 262px; height: 43px;"> </div>
 		</div>
 		<div class="mainBodyDiv">
+			<div class="menuGps">
+				<!-- START Events Table -->
+				<table class="listTable">
+					<thead>
+					<tr>
+						<th colspan="3">Latest Events</th>
+					</tr>
+					</thead>
+					<tbody>
+					<!--Start Normal Row -->
+					<tr class="trNormal">
+						<td>08/01/2012</td>
+						<td>Fall Detection</td>
+						<td class="rowPointer" rowspan="2"></td>
+					</tr>
+					<tr class="trNormal">
+						<td colspan="2">794 E 3950 N; Provo UT 84606</td>
+					</tr>
+					<!--  END Normal Row -->
+					<tr>
+						<td class="rowSpacer" colspan="3"></td>
+					</tr>
+					<!-- START Alternate Row -->
+					<tr class="trAlt">
+						<td>08/01/2012</td>
+						<td>Fall Detection</td>
+						<td class="rowPointer" rowspan="2"></td>
+					</tr>
+					<tr class="trAlt">
+						<td colspan="2">794 E 3950 N; Provo UT 84606</td>
+					</tr>
+					<!--   END Alternate Row -->
+					<tr>
+						<td class="rowSpacer" colspan="3"></td>
+					</tr>
+					<!--Start Normal Row -->
+					<tr class="trNormal">
+						<td>08/01/2012</td>
+						<td>Fall Detection</td>
+						<td class="rowPointer" rowspan="2"></td>
+					</tr>
+					<tr class="trNormal">
+						<td colspan="2">794 E 3950 N; Provo UT 84606</td>
+					</tr>
+					<!--  END Normal Row -->
+					<tr>
+						<td class="rowSpacer" colspan="3"></td>
+					</tr>
+					<!-- START Alternate Row -->
+					<tr class="trAlt">
+						<td>08/01/2012</td>
+						<td>Fall Detection</td>
+						<td class="rowPointer" rowspan="2"></td>
+					</tr>
+					<tr class="trAlt">
+						<td colspan="2">794 E 3950 N; Provo UT 84606</td>
+					</tr>
+					<!--   END Alternate Row -->
+					<tr>
+						<td class="rowSpacer" colspan="3"></td>
+					</tr>
+					<!--Start Normal Row -->
+					<tr class="trNormal">
+						<td>08/01/2012</td>
+						<td>Fall Detection</td>
+						<td class="rowPointer" rowspan="2"></td>
+					</tr>
+					<tr class="trNormal">
+						<td colspan="2">794 E 3950 N; Provo UT 84606</td>
+					</tr>
+					<!--  END Normal Row -->
+					</tbody>
+				</table>
+				<!--   END Events Table -->
+				<br />
+				<!-- START GPS Boundaries -->
+				<table class="listTable">
+					<thead>
+					<tr>
+						<th colspan="3">GPS Boundaries</th>
+					</tr>
+					</thead>
+					<tbody>
+					<!--Start Normal Row -->
+					<tr class="trNormal">
+						<td>08/01/2012</td>
+						<td>Fall Detection</td>
+						<td class="rowPointer" rowspan="2"></td>
+					</tr>
+					<tr class="trNormal">
+						<td colspan="2">794 E 3950 N; Provo UT 84606</td>
+					</tr>
+					<!--  END Normal Row -->
+					</tbody>
+				</table>
+				<!--   END GPS Boundaries -->
+			</div>
 			<div id="map_canvas">Maps Goes Here</div>
 			<div class="toolsMenu cf">
-				<div class="btnMain btnBullsEye"></div>
-				<div class="btnMain btnCircle"></div>
-				<div class="btnMain btnPolygon"></div>
-				<div id="devOptions" class="devOptions" style="position:absolute; bottom:10px; right:10px;">
+				<div class="btnMain btnToolBullsEye"></div>
+				<div class="btnMain btnToolCircle"></div>
+				<div class="btnMain btnToolPolygon"></div>
+				<div id="devOptions" class="devOptions">
 					<select id="toolchoice" name="toolchoice" style="border:1px solid #000000;" onchange="SOS.Gps.Maps.setTool();">
 						<option value="3">Rectangle</option>
 						<option value="4" selected="">Circle</option>

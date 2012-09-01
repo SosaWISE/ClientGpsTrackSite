@@ -23,6 +23,7 @@ Ext.define("SOS.Services.ClientGpsTrack",
 	 * @desc {Number} Customer ID.
 	 */
 	, CustomerID: null
+	, SessionID: null
 	, DealerId: null
 	, AddressId: null
 	, LeadId: null
@@ -63,6 +64,7 @@ Ext.define("SOS.Services.ClientGpsTrack",
 		var oData = {
 			szUsername: username
 			, szPassword: password
+			, lSessionID: SOS.AppService.SessionID
 		};
 		function fxSuccess (oResponse)
 		{
@@ -71,6 +73,7 @@ Ext.define("SOS.Services.ClientGpsTrack",
 			{
 				/** Get ID's. */
 				SOS.Services.ClientGpsTrack.CustomerID = oResponse.Value.CustomerID;
+				SOS.Services.ClientGpsTrack.SessionID = oResponse.Value.SessionID;
 				SOS.Services.ClientGpsTrack.CustomerTypeId = oResponse.Value.CustomerTypeId;
 				SOS.Services.ClientGpsTrack.CustomerMasterFileId = oResponse.Value.CustomerMasterFileId;
 				SOS.Services.ClientGpsTrack.DealerId = oResponse.Value.DealerId;
