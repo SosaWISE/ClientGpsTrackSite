@@ -172,7 +172,7 @@ div.menuGps {
 	height: 656px;
 	display: initial;
 	float: left;
-	padding: 5px;
+	padding: 5px 10px;
 	box-sizing:border-box;
 	-moz-box-sizing:border-box; /* Firefox */
 	-webkit-box-sizing:border-box; /* Safari */}
@@ -190,30 +190,43 @@ div.menuGps th {
 	font-size: 12px;
 	font-family: Arial;
 }
-div.menuGps tr.trNormal, div.menuGps tr.trAlt {
+div.menuGps tr.trNormal, div.menuGps tr.trAlt, div.menuGps tr.trNormalGps, div.menuGps tr.trAltGps {
 	font-size: 11px;
 	font-family: helvetica;
 	border: solid 1px;
+	cursor: pointer;
 }
 
-div.menuGps tr.trNormal td, div.menuGps tr.trAlt td {
-	border: solid 1px;
+div.menuGps tr.trNormal td, div.menuGps tr.trAlt td, div.menuGps tr.trNormalGps td, div.menuGps tr.trAltGps td {
+	border: solid 1px blue;
+}
+div.menuGps tr.trNormalGps td, div.menuGps tr.trAltGps td {
+	border: solid 1px #C0504D;
 }
 
-div.menuGps tr.trNormal {
-	background-color: #87cefa;
-}
-div.menuGps tr.trAlt {
-	background-color: #b0c4de;
-}
+div.menuGps tr.trNormal { background-color: #87cefa; }
+div.menuGps tr.trAlt { background-color: rgba(135, 206, 250, 0.28); }
+div.menuGps tr.trNormalGps { background-color: #EFD3D2; }
+div.menuGps tr.trAltGps { background-color: rgba(239, 211, 210, 0.24); }
 
 div.menuGps td.rowPointer {
-	background-image: url('/themes/sos/img/rowPointer.png');
-	background-repeat: no-repeat;
+	background: url('../img/rowPointer.png') no-repeat;
 	min-width: 3px;
 	min-height: 34px;
 }
+
+div.menuGps td.rowPointerGps {
+	background: url('../img/rowPointer-Burgundy.png') no-repeat;
+	min-width: 3px;
+	min-height: 34px;
+}
+div.menuGps td.rowPointerGpsSmall {
+	background: url('../img/rowPointer-BurgundySmall.png') no-repeat;
+	min-width: 3px;
+	min-height: 17px;
+}
+
 td.rowSpacer {
-	min-height: 2px;
+	min-height: 1px;
 	background-color: black;
 }

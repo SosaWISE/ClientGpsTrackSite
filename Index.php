@@ -68,6 +68,9 @@
 		</div>
 		<div class="mainBodyDiv">
 			<div class="menuGps">
+				<div class="monPartyInfo">
+					<h4>Monitored Party</h4>
+				</div>
 				<!-- START Events Table -->
 				<table class="listTable">
 					<thead>
@@ -151,13 +154,65 @@
 					</thead>
 					<tbody>
 					<!--Start Normal Row -->
-					<tr class="trNormal">
-						<td>08/01/2012</td>
-						<td>Fall Detection</td>
-						<td class="rowPointer" rowspan="2"></td>
+					<tr class="trNormalGps">
+						<td>Circle</td>
+						<td>Radius: <strong>200ft</strong></td>
+						<td class="rowPointerGps" rowspan="2"></td>
 					</tr>
-					<tr class="trNormal">
-						<td colspan="2">794 E 3950 N; Provo UT 84606</td>
+					<tr class="trNormalGps">
+						<td colspan="2">Lat\Long: <strong>40.123456\-111.343456</strong></td>
+					</tr>
+					<!--  END Normal Row -->
+					<tr>
+						<td class="rowSpacer" colspan="3"></td>
+					</tr>
+					<!--Start Normal Row -->
+					<tr class="trAltGps">
+						<td>Circle</td>
+						<td>Radius: <strong>200ft</strong></td>
+						<td class="rowPointerGps" rowspan="2"></td>
+					</tr>
+					<tr class="trAltGps">
+						<td colspan="2">Lat\Long: <strong>40.123456\-111.343456</strong></td>
+					</tr>
+					<!--  END Normal Row -->
+					<tr>
+						<td class="rowSpacer" colspan="3"></td>
+					</tr>
+					<!--Start Normal Row -->
+					<tr class="trNormalGps">
+						<td>Circle</td>
+						<td>Radius: <strong>200ft</strong></td>
+						<td class="rowPointerGps" rowspan="2"></td>
+					</tr>
+					<tr class="trNormalGps">
+						<td colspan="2">Lat\Long: <strong>40.123456\-111.343456</strong></td>
+					</tr>
+					<!--  END Normal Row -->
+					<tr>
+						<td class="rowSpacer" colspan="3"></td>
+					</tr>
+					<!--Start Normal Row -->
+					<tr class="trAltGps">
+						<td>Circle</td>
+						<td>Radius: <strong>200ft</strong></td>
+						<td class="rowPointerGps" rowspan="2"></td>
+					</tr>
+					<tr class="trAltGps">
+						<td colspan="2">Lat\Long: <strong>40.123456\-111.343456</strong></td>
+					</tr>
+					<!--  END Normal Row -->
+					<tr>
+						<td class="rowSpacer" colspan="3"></td>
+					</tr>
+					<!--Start Normal Row -->
+					<tr class="trNormalGps">
+						<td>Circle</td>
+						<td>Radius: <strong>200ft</strong></td>
+						<td class="rowPointerGps" rowspan="2"></td>
+					</tr>
+					<tr class="trNormalGps">
+						<td colspan="2">Lat\Long: <strong>40.123456\-111.343456</strong></td>
 					</tr>
 					<!--  END Normal Row -->
 					</tbody>
