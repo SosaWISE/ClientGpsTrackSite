@@ -168,14 +168,18 @@ div.toolsMenu {
 }
 div.menuGps {
 	background-color: beige;
-	width: 220px;
+	/*width: 220px;*/
+	width: 0;
 	height: 656px;
 	display: initial;
 	float: left;
-	padding: 5px 10px;
+	/*padding: 5px 10px;*/
+	padding: 5px 0;
+	overflow: hidden;
 	box-sizing:border-box;
 	-moz-box-sizing:border-box; /* Firefox */
-	-webkit-box-sizing:border-box; /* Safari */}
+	-webkit-box-sizing:border-box; /* Safari */
+}
 
 /** Events Table. */
 table.listTable {
@@ -229,4 +233,28 @@ div.menuGps td.rowPointerGpsSmall {
 td.rowSpacer {
 	min-height: 1px;
 	background-color: black;
+}
+
+/** GPS Info Slider. */
+div.monPartyInfo {
+	border: solid 1px blueViolet;
+	border-radius: 10px;
+}
+table.monPartyInfo {
+	width: 100%;
+}
+span.secTitle {
+	text-align: center;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+
+td.fieldTitle {
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size: 11px;
+}
+td.fieldValue {
+	font-family: Verdana,Geneva,sans-serif;
+	font-weight: bold;
+	font-size: 11px;
+	text-align: left;
 }

@@ -22,7 +22,7 @@ Ext.define("SOS.Modals.InfoForm",
 		//var me = this;
 		options = options || {};
 		var tplInfoForm = SOS.AppService.TemplateFiles['MdlDlgInfoForm.html'];
-		debugger;
+
 		/** Build Configuration options for the window. */
 		var config = Ext.merge(options,
 			{

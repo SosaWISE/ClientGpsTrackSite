@@ -19,6 +19,8 @@ Ext.define("SOS.AppService",
 	 ******************************************************************************************************************/
 	, SessionID: null
 
+	, CustomerInfo: null
+
 	, TemplateFiles: []
 
 	/*******************************************************************************************************************
@@ -69,8 +71,17 @@ Ext.define("SOS.AppService",
 			, LoadFileView("PaneMainGPSMedical.html")
 		).then(function(){
 				console.log("Finished the loading of templates");
-				var oLoginForm = new SOS.Modals.LoginForm();
-				oLoginForm.show();
+
+				/** Check to see if we have been authenticated. */
+				if (!SOS.AppService.CustomerInfo)
+				{
+					var oLoginForm = new SOS.Modals.LoginForm();
+					oLoginForm.show();
+				}
+				else
+				{
+					SOS.Controllers.Devices.Init({CustomerMasterFileID: SOS.AppService.CustomerInfo.CustomerMasterFileId});
+				}
 			});
 	}
 
@@ -95,6 +106,10 @@ Ext.define("SOS.AppService",
 
 			console.log("SessionStart: Made it successfully", oResponse);
 			SOS.AppService.SessionID = oResponse.Value.SessionId;
+			if (oResponse.Value.AuthCustomer)
+			{
+				SOS.AppService.CustomerInfo = oResponse.Value.AuthCustomer;
+			}
 			//alert("Successfully began a session with SessionID of '" + oResponse.Value.SessionId + "'");
 		}
 		function fxFailure(jxHdr)

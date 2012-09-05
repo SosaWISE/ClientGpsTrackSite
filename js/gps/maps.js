@@ -127,7 +127,6 @@ SOS.Gps.Maps = (function ()
 	return {
 		initialize: function (oOptions)
 		{
-			debugger;
 			/** Initialize. */
 			geocoder = new google.maps.Geocoder();
 			//var latlng = new google.maps.LatLng(40.768617, -111.891975);//(45.0,7.0);//40.764723, -111.896433
@@ -220,7 +219,6 @@ SOS.Gps.Maps = (function ()
 
 		, preparePolyline: function ()
 		{
-			debugger;
 			var polyOptions = {
 				path: polyPoints,
 				strokeColor: polylinestyles[lcur].color,

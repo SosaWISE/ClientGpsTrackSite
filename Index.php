@@ -38,6 +38,9 @@
 	<script type="text/javascript" src="js/app/Modals/LoginForm.js"></script>
 	<script type="text/javascript" src="js/app/Modals/MdlDlgInfoForm.js"></script>
 	<!--   END Modals -->
+	<!-- START Sliders -->
+	<script type="text/javascript" src="js/app/Sliders/GpsInfoSlider.js"></script>
+	<!--   END Sliders -->
 	<!-- START Models-->
 	<script type="text/javascript" src="js/app/Models/DeviceModel.js"></script>
 	<!--   END Models-->
@@ -69,8 +72,30 @@
 		<div class="mainBodyDiv">
 			<div class="menuGps">
 				<div class="monPartyInfo">
-					<h4>Monitored Party</h4>
+					<table class="monPartyInfo">
+						<thead>
+						<tr>
+							<th colspan="3" class="secTitle">Monitored Information</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<td class="fieldTitle">N</td>
+							<td class="fieldValue">Andres Sosa</td>
+							<td rowspan="3"><img src="/images/Picture.png" style="width: 50px;"/></td>
+						</tr>
+						<tr>
+							<td class="fieldTitle">A</td>
+							<td class="fieldValue">1184 N 840 E<br />OREM UT 84097</td>
+						</tr>
+						<tr>
+							<td class="fieldTitle">M</td>
+							<td class="fieldValue">(801) 822-9323</td>
+						</tr>
+						</tbody>
+					</table>
 				</div>
+				<br />
 				<!-- START Events Table -->
 				<table class="listTable">
 					<thead>

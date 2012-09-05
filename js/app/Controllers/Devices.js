@@ -136,6 +136,10 @@ Ext.define("SOS.Controllers.Devices",
 			};
 
 			SOS.Gps.Maps.initialize(oOptions);
+
+			/** Show account information. */
+			debugger;
+			SOS.Sliders.GpsInfoSlider.Init(oResponse.Value);
 		}
 		function fxFailure (oResponse){
 			console.log(oResponse);
