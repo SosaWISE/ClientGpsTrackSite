@@ -29,11 +29,14 @@
 	<script type="text/javascript" src="extjs/ext-all-dev.js"></script>
 	<!--<script type="text/javascript" src="extjs/ext-all-debug.js"></script>-->
 	<!--<script type="text/javascript" src="extjs/ext-all.js"></script>-->
-	<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<!--	<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>-->
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.1.js"></script>
+	<script type="text/javascript" src="http://jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>
 	<script type="text/javascript" src="js/jquery-ui-1.8.20.custom.min.js"></script>
 	<script type="text/javascript" src="js/app/Config.js"></script>
 	<script type="text/javascript" src="js/app/AppService.js"></script>
 	<script type="text/javascript" src="js/app/Services/ClientGpsTrack.js"></script>
+	<script type="text/javascript" src="js/app/Services/Authentication.js"></script>
 	<!-- START Modals -->
 	<script type="text/javascript" src="js/app/Modals/LoginForm.js"></script>
 	<script type="text/javascript" src="js/app/Modals/MdlDlgInfoForm.js"></script>
@@ -103,7 +106,7 @@
 						<th colspan="3">Latest Events</th>
 					</tr>
 					</thead>
-					<tbody>
+					<tbody id="deviceEventTblBdy">
 					<!--Start Normal Row -->
 					<tr class="trNormal">
 						<td>08/01/2012</td>

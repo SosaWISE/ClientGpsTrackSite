@@ -129,19 +129,19 @@ Ext.define("SOS.Services.ClientGpsTrack",
 		if (oParams === undefined)
 		{
 			alert("Please pass oParams");
-			return;
+			return null;
 		}
 		if (oParams.CustomerMasterFileID === undefined)
 		{
 			alert("Please pass a CMFID.");
-			return;
+			return null;
 		}
 
 		/** Build arguments. */
 		oData.lCMFID = oParams.CustomerMasterFileID;
 
-		/** Execute call. */
-		var jxHdr = $.ajax({
+		/** Execute call and return header. */
+		return $.ajax({
 			url: SOS.Config.ClientGpsTrackSrvUrl() + "GetListOfDevicesByCMFID"
 			, data: oData
 			, type: "GET"
@@ -151,9 +151,6 @@ Ext.define("SOS.Services.ClientGpsTrack",
 			, success: fxSuccess
 			, error: fxFailure
 		});
-
-		/** Return header. */
-		return jxHdr;
 	}
 
 	, GetDeviceDetails: function (oParams, afxSuccess, afxFailure)
@@ -167,37 +164,93 @@ Ext.define("SOS.Services.ClientGpsTrack",
 		if (oParams === undefined)
 		{
 			alert("Please pass oParams");
-			return;
+			return null;
 		}
 		if (oParams.AccountID === undefined)
 		{
 			alert("Please pass an AccountID.");
-			return;
+			return null;
 		}
 
 		if (oParams.CustomerID === undefined)
 		{
 			alert("Please pass a CustomerID.");
-			return;
+			return null;
 		}
 
 		/** Build arguments. */
 		oData.lAccountID = oParams.AccountID;
 		oData.lCustomerID = oParams.CustomerID;
 
-		/** Execute call. */
-		var jxHdr = $.ajax({
-			url: SOS.Config.ClientGpsTrackSrvUrl() + "GetDeviceDetails"
-			, data: oData
-			, type: "GET"
-			, dataType: "jsonp"
-			, contentType: 'application/json; charset=utf-8'
-			, jsonpCallback: "jsoncallback"
-			, success: fxSuccess
-			, error: fxFailure
-		});
-
 		/** Return header. */
-		return jxHdr;
+		return $.ajax({
+			url:SOS.Config.ClientGpsTrackSrvUrl() + "GetDeviceDetails"
+			, data:oData
+			, type:"GET"
+			, dataType:"jsonp"
+			, contentType:'application/json; charset=utf-8'
+			, jsonpCallback:"jsoncallback"
+			, success:fxSuccess
+			, error:fxFailure
+		});
+	}
+
+	, GetDeviceEvents: function (oParams, afxSuccess, afxFailure)
+	{
+		/** Initialize. */
+		var oData = {};
+		function fxSuccess(oResponse) { if (afxSuccess) afxSuccess(oResponse); }
+		function fxFailure(oResponse) { if (afxFailure) afxFailure(oResponse); }
+
+		/** Check arguments. */
+		if (oParams === undefined)
+		{
+			alert("Please pass oParams");
+			return null;
+		}
+		if (oParams.AccountID === undefined)
+		{
+			alert("Please pass an AccountID.");
+			return null;
+		}
+		if (oParams.StartDate === undefined)
+		{
+			alert("Please pass an StartDate.");
+			return null;
+		}
+		if (oParams.EndDate === undefined)
+		{
+			alert("Please pass an EndDate.");
+			return null;
+		}
+		if (oParams.PageSize === undefined)
+		{
+			alert("Please pass an PageSize.");
+			return null;
+		}
+		if (oParams.PageNumber === undefined)
+		{
+			alert("Please pass an PageNumber.");
+			return null;
+		}
+
+		/** Create arguments. */
+		oData.lAccountID = oParams.AccountID;
+		oData.sStartDate = oParams.StartDate;
+		oData.sEndDate = oParams.EndDate;
+		oData.nPageSize = oParams.PageSize;
+		oData.nPageNumber = oParams.PageNumber;
+
+		/** Execute and Return header. */
+		return $.ajax({
+			url:SOS.Config.ClientGpsTrackSrvUrl() + "GetDeviceEvents"
+			, data:oData
+			, type:"GET"
+			, dataType:"jsonp"
+			, contentType:'application/json; charset=utf-8'
+			, jsonpCallback:"jsoncallback"
+			, success:fxSuccess
+			, error:fxFailure
+		});
 	}
 });

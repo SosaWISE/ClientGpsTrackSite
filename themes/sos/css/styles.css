@@ -239,6 +239,7 @@ td.rowSpacer {
 div.monPartyInfo {
 	border: solid 1px blueViolet;
 	border-radius: 10px;
+	box-shadow: 0px 3px 6px 1px rgba(0, 0, 0, 0.66);
 }
 table.monPartyInfo {
 	width: 100%;

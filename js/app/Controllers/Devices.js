@@ -113,7 +113,7 @@ Ext.define("SOS.Controllers.Devices",
 		var lAccountID = $(e.currentTarget).attr("data-id").replace("dId-", "");
 		var lCustomerId = $(e.currentTarget).attr("data-idid").replace("cId-", "");
 
-		console.log(oEl, lAccountID, lCustomerId);
+		console.log("Button Click on Device Icon:", oEl, lAccountID, lCustomerId);
 
 		/**
 		 * Call server to get information. */
@@ -138,14 +138,41 @@ Ext.define("SOS.Controllers.Devices",
 			SOS.Gps.Maps.initialize(oOptions);
 
 			/** Show account information. */
-			debugger;
 			SOS.Sliders.GpsInfoSlider.Init(oResponse.Value);
 		}
 		function fxFailure (oResponse){
 			console.log(oResponse);
 		}
 
-		SOS.Services.ClientGpsTrack.GetDeviceDetails(oOptions, fxSuccess, fxFailure);
+		$.when(SOS.Services.ClientGpsTrack.GetDeviceDetails(oOptions, fxSuccess, fxFailure))
+			.done(SOS.Controllers.Devices.loadDeviceEvents, e);
+	}
+	, loadDeviceEvents: function (deviceDetailsResult)
+	{
+		/** Initialize. */
+		console.log("Loading Device Events:", deviceDetailsResult);
+		var endDate = new Date();
+		var startDate = new Date();
+		startDate = new Date(startDate.setDate(startDate.getDate() - 30));
+		var oOptions = {
+			AccountID : deviceDetailsResult.Value.AccountId
+			, StartDate : (1 + startDate.getUTCMonth()) + '/' + startDate.getUTCDate() + '/' + startDate.getUTCFullYear()
+			, EndDate : (1 + endDate.getUTCMonth()) + '/' + endDate.getUTCDate() + '/' + endDate.getUTCFullYear()
+			, PageSize: 5
+			, PageNumber: 1
+		};
+		function fxSuccess(oResponse)
+		{
+			console.log(oResponse.Value);
+			SOS.Sliders.GpsInfoSlider.buildSmallEventsList(oResponse.Value);
+		}
+		function fxFailure(oResponse)
+		{
+			alert("Failed to get Event Details:\r" + oResponse.Message);
+		}
+
+		/** Return execution header. */
+		return SOS.Services.ClientGpsTrack.GetDeviceEvents(oOptions, fxSuccess, fxFailure);
 	}
 	/**   END Member Functions. */
 });
