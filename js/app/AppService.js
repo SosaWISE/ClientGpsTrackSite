@@ -71,7 +71,6 @@ Ext.define("SOS.AppService",
 				console.log('Load was performed.', data);
 			}});
 		}
-		debugger;
 		/** Load all files. */
 		$.when(
 			LoadFileView("MdlDlgLoginForm.html")
@@ -124,7 +123,6 @@ Ext.define("SOS.AppService",
 		{
 			console.log(jxHdr);
 		}
-		debugger;
 		/** Execute ajax. */
 		return $.ajax({
 			url: SOS.Config.AuthServiceUrl() + "SosStart"
@@ -180,7 +178,6 @@ Ext.define("SOS.AppService",
 		/** Check to see if it was passed. */
 		var oValue = SOS.Utils.Strings.getParameterByName('st');
 		if (!oValue) { return "No Token Passed"; }
-		debugger;
 
 		/** Authenticate via token.
 		function fxSuccess(oResponse)
