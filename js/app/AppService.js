@@ -33,6 +33,14 @@ Ext.define("SOS.AppService",
 		//$("div.btnInformation").bind("click", SOS.AppService.LoginUser);
 		$("div.btnInformation").bind("click", SOS.Modals.InfoForm.Show);
 
+		var sSt = SOS.Utils.Strings.getParameterByName('st');
+		if (sSt)
+		{	$.when(SOS.AppService.TokenAuthentication())
+			.done(SOS.AppService.CheckTokenResponse);
+			return;
+		}
+
+		/** Normal authentication. */
 		$.when(SOS.AppService.SessionStart())
 			.done(SOS.AppService.LoadExtFiles);
 	}
@@ -63,7 +71,7 @@ Ext.define("SOS.AppService",
 				console.log('Load was performed.', data);
 			}});
 		}
-
+		debugger;
 		/** Load all files. */
 		$.when(
 			LoadFileView("MdlDlgLoginForm.html")
@@ -116,7 +124,7 @@ Ext.define("SOS.AppService",
 		{
 			console.log(jxHdr);
 		}
-
+		debugger;
 		/** Execute ajax. */
 		return $.ajax({
 			url: SOS.Config.AuthServiceUrl() + "SosStart"
@@ -166,5 +174,40 @@ Ext.define("SOS.AppService",
 			, success: fxSuccess
 			, error: fxFailure
 		});
+	}
+	, TokenAuthentication: function ()
+	{
+		/** Check to see if it was passed. */
+		var oValue = SOS.Utils.Strings.getParameterByName('st');
+		if (!oValue) { return "No Token Passed"; }
+		debugger;
+
+		/** Authenticate via token.
+		function fxSuccess(oResponse)
+		{
+			if (oResponse.Code === 0)
+			{
+				document.location.href = "/";
+			}
+		}*/
+
+		/** Execute. */
+		return SOS.Services.Authentication.TokenAuthentication(oValue/*, fxSuccess*/);
+
+	}
+
+	, CheckTokenResponse: function(oResponse)
+	{
+		/** Check that this is a Token Authentication. */
+		if (oResponse === "No Token Passed") return oResponse;
+
+		/** Check to see if the response was right. */
+		if (oResponse.Code === 0)
+		{
+			document.location.href = "/";
+		}
+
+		/** Return default. */
+		return oResponse;
 	}
 });

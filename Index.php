@@ -34,6 +34,9 @@
 	<script type="text/javascript" src="http://jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>
 	<script type="text/javascript" src="js/jquery-ui-1.8.20.custom.min.js"></script>
 	<script type="text/javascript" src="js/app/Config.js"></script>
+	<!-- START Utils -->
+    <script type="text/javascript" src="js/app/Utils/Strings.js"></script>
+	<!-- START Apps -->
 	<script type="text/javascript" src="js/app/AppService.js"></script>
 	<script type="text/javascript" src="js/app/Services/ClientGpsTrack.js"></script>
 	<script type="text/javascript" src="js/app/Services/Authentication.js"></script>

@@ -140,6 +140,7 @@ Ext.define("SOS.Services.ClientGpsTrack",
 		/** Build arguments. */
 		oData.lCMFID = oParams.CustomerMasterFileID;
 
+		debugger;
 		/** Execute call and return header. */
 		return $.ajax({
 			url: SOS.Config.ClientGpsTrackSrvUrl() + "GetListOfDevicesByCMFID"
