@@ -130,6 +130,7 @@ Ext.define("SOS.AppService",
 			, type: "GET"
 			, dataType: "jsonp"
 			, contentType: 'application/json; charset=utf-8'
+			//, contentType: 'application/json'
 			, jsonpCallback: "jsoncallback"
 			, success: fxSuccess
 			, error: fxFailure

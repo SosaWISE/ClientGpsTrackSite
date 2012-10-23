@@ -128,11 +128,12 @@ Ext.define("SOS.Controllers.Devices",
 				alert("The following error was encountered: \n" + oResponse.Message);
 				return;
 			}
+			debugger;
 			console.log(oResponse);
 			/** Load Google map. */
 			var oOptions = {
-				latitude: -111.67569100000003
-				, longitude: 40.31907001347657
+				latitude: 40.31907001347657
+				, longitude: -111.67569100000003
 			};
 
 			SOS.Gps.Maps.initialize(oOptions);
@@ -144,8 +145,9 @@ Ext.define("SOS.Controllers.Devices",
 			console.log(oResponse);
 		}
 
-		$.when(SOS.Services.ClientGpsTrack.GetDeviceDetails(oOptions, fxSuccess, fxFailure))
-			.done(SOS.Controllers.Devices.loadDeviceEvents, e);
+		$.when(SOS.Services.ClientGpsTrack.GetDeviceDetailsJson(oOptions, fxSuccess, fxFailure))
+			.done(SOS.Controllers.Devices.loadDeviceEvents, e)
+			.done(SOS.Controllers.Devices.loadDeviceFences, e);
 	}
 	, loadDeviceEvents: function (deviceDetailsResult)
 	{
@@ -173,6 +175,33 @@ Ext.define("SOS.Controllers.Devices",
 
 		/** Return execution header. */
 		return SOS.Services.ClientGpsTrack.GetDeviceEvents(oOptions, fxSuccess, fxFailure);
+	}
+	, loadDeviceFences: function(eventDetailsResult)
+	{
+		/** Check that the GetDeviceDetails was successful. */
+		if (eventDetailsResult.Code === 0)
+		{
+			/** Initialize. */
+			console.log("eventDetailsResult", eventDetailsResult);
+			var oModel = eventDetailsResult.Value;
+			var oOptions = { AccountID: eventDetailsResult}
+
+			/** Set return handlers. */
+			function fxSuccess(oResponse)
+			{
+				if (oResponse.Code === 0)
+				{
+
+				}
+			}
+			function fxFailure(oResponse)
+			{
+				alert("Error calling 'loadDeviceFences'.");
+				console.log("Error calling 'loadDeviceFences'", oResponse);
+			}
+
+			return SOS.Services.ClientGpsTrack.GetDeviceFences(oOptions, fxSuccess, fxFailure);
+		}
 	}
 	/**   END Member Functions. */
 });

@@ -195,6 +195,52 @@ Ext.define("SOS.Services.ClientGpsTrack",
 		});
 	}
 
+	, GetDeviceDetailsJson: function (oParams, afxSuccess, afxFailure)
+{
+	/** Initialize. */
+	var oData = {};
+	function fxSuccess(oResponse) { if (afxSuccess) afxSuccess(oResponse); }
+	function fxFailure(oResponse) { if (afxFailure) afxFailure(oResponse); }
+
+	/** Check arguments. */
+	if (oParams === undefined)
+	{
+		alert("Please pass oParams");
+		return null;
+	}
+	if (oParams.AccountID === undefined)
+	{
+		alert("Please pass an AccountID.");
+		return null;
+	}
+
+	if (oParams.CustomerID === undefined)
+	{
+		alert("Please pass a CustomerID.");
+		return null;
+	}
+
+	/** Build arguments. */
+	oData.lAccountID = oParams.AccountID;
+	oData.lCustomerID = oParams.CustomerID;
+	var oJson = JSON.stringify(oData);
+
+	/** Return header. */
+	return $.ajax({
+		url:SOS.Config.ClientGpsTrackSrvUrl() + "GetDeviceDetailsJson"
+		, data:oJson
+		, type:"POST"
+		, dataType:"json"
+		, crossDomain: true
+		, xhrFields: {
+			withCredentials: true
+		}
+		, contentType:'application/json'
+		, success:fxSuccess
+		, error:fxFailure
+	});
+}
+
 	, GetDeviceEvents: function (oParams, afxSuccess, afxFailure)
 	{
 		/** Initialize. */
@@ -249,6 +295,148 @@ Ext.define("SOS.Services.ClientGpsTrack",
 			, dataType:"jsonp"
 			, contentType:'application/json; charset=utf-8'
 			, jsonpCallback:"jsoncallback"
+			, success:fxSuccess
+			, error:fxFailure
+		});
+	}
+
+	, GetDeviceFences: function(oParams, afxSuccess, afxFailure)
+	{
+		/** Initialize. */
+		var oData = {};
+		function fxSuccess(oResponse) { if (afxSuccess) afxSuccess(oResponse); }
+		function fxFailure(oResponse) { if (afxFailure) afxFailure(oResponse); }
+
+		/** Check arguments. */
+		if (oParams === undefined)
+		{
+			alert("Please pass oParams");
+			return null;
+		}
+		if (oParams.AccountID === undefined)
+		{
+			alert("Please pass an AccountID.");
+			return null;
+		}
+
+		/** Create arguments. */
+		oData.lAccountID = oParams.AccountID;
+		var oJson = JSON.stringify(oData);
+
+		/** Return header. */
+		return $.ajax({
+			url:SOS.Config.ClientGpsTrackSrvUrl() + "GetDeviceFencesJson"
+			, data:oJson
+			, type:"POST"
+			, dataType:"json"
+			, crossDomain: true
+			, xhrFields: { withCredentials: true }
+			, contentType:'application/json'
+			, success:fxSuccess
+			, error:fxFailure
+		});
+	}
+
+	, SavePolygonFence: function (oParams, afxSuccess, afxFailure)
+	{
+		/** Initialize. */
+		var oData = {};
+		function fxSuccess(oResponse)
+		{
+			if (afxSuccess) { afxSuccess(oResponse); return; }
+			console.log("Success Response: ", oResponse);
+		}
+		function fxFailure(oResponse)
+		{
+			if (afxFailure) { afxFailure(oResponse); return; }
+			console.log("Failure Response: ", oResponse);
+		}
+
+		/** Check Arguments. */
+		if (oParams === undefined)
+		{
+			alert("Please pass oParams");
+			return null;
+		}
+		if (oParams.GeoFenceID === undefined) { oParams.GeoFenceID = 0; }
+		if (oParams.AccountId === undefined)
+		{
+			alert("Please pass AccountId");
+			return null;
+		}
+		if (oParams.CoordList === undefined)
+		{
+			alert("Please pass the list of coordinates");
+			return null;
+		}
+
+		/** Create arguments to be passed. */
+		oData.lGeoFenceID = oParams.GeoFenceID;
+		oData.lAccountId = oParams.AccountId;
+		oData.oCoordList = oParams.CoordList;
+		var oJson = JSON.stringify(oData);
+
+		/** Execute and Return header. */
+		return $.ajax({
+			url:SOS.Config.ClientGpsTrackSrvUrl() + "GeoPolygonSave"
+			, data:oJson
+			, type:"POST"
+			, dataType:"json"
+			, crossDomain: true
+			, xhrFields: {
+					withCredentials: true
+				}
+			, contentType:'application/json'
+			, success:fxSuccess
+			, error:fxFailure
+		});
+	}
+
+	, SaveSimplePolygonFence: function (oParams, afxSuccess, afxFailure)
+	{
+		/** Initialize. */
+		var oData = {};
+		function fxSuccess(oResponse) { if (afxSuccess) afxSuccess(oResponse); }
+		function fxFailure(oResponse) { if (afxFailure) afxFailure(oResponse); }
+
+		/** Check Arguments. */
+		if (oParams === undefined)
+		{
+			alert("Please pass oParams");
+			return null;
+		}
+		if (oParams.GeoFenceID === undefined) { oParams.GeoFenceID = 0; }
+	//	if (oParams.AccountId === undefined)
+	//	{
+	//		alert("Please pass AccountId");
+	//		return null;
+	//	}
+	//	if (oParams.CoordList === undefined)
+	//	{
+	//		alert("Please pass the list of coordinates");
+	//		return null;
+	//	}
+
+		/** Create arguments to be passed. */
+		oData.lGeoFenceID = oParams.GeoFenceID;
+		oData.lAccountId = oParams.AccountId;
+	//	oData.laList = [1232,13123,131313,35453,5775];
+		oData.oCoordList =  [{ GeoFencePolygonID:1, GeoFenceId: 1 },
+		    { GeoFencePolygonID:2, GeoFenceId: 2 },
+		    { GeoFencePolygonID:3, GeoFenceId: 3 },
+		    { GeoFencePolygonID:4, GeoFenceId: 4 },
+		    { GeoFencePolygonID:5, GeoFenceId: 5 }];
+
+
+		var sJson = JSON.stringify(oData);
+		/** Execute and Return header. */
+		return $.ajax({
+			url:SOS.Config.ClientGpsTrackSrvUrl() + "GeoSimpleSave"
+			, data: sJson
+			, type:"POST"
+			, dataType:"json"
+			, crossDomain: true
+			, contentType: 'application/json'
 			, success:fxSuccess
 			, error:fxFailure
 		});

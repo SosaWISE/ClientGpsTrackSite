@@ -54,8 +54,9 @@
 	<script type="text/javascript" src="js/app/Controllers/Devices.js"></script>
 	<!--   END Controllers -->
 	<!-- START Google Maps Api -->
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false" ></script>
-	<script type="text/javascript" src="js/Gps/maps.js"></script>
+<!--	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false" ></script>-->
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCJY7XN6PfUqHUtYR6BEK1hB_tt9wyzVy8&libraries=geometry&sensor=true"></script>
+	<script type="text/javascript" src="js/Gps/mapsV3.js"></script>
 	<!--   END Google Maps Api -->
 	<script type="text/javascript">
 		/** Boot strap. */
