@@ -47,9 +47,12 @@
 	<!-- START Sliders -->
 	<script type="text/javascript" src="js/app/Sliders/GpsInfoSlider.js"></script>
 	<!--   END Sliders -->
-	<!-- START Models-->
+	<!-- START Models -->
 	<script type="text/javascript" src="js/app/Models/DeviceModel.js"></script>
-	<!--   END Models-->
+	<!--   END Models -->
+	<!-- START Views -->
+	<script type="text/javascript" src="js/app/Views/GpsFenceList.js"></script>
+	<!--   END Views -->
 	<!-- START Controllers -->
 	<script type="text/javascript" src="js/app/Controllers/Devices.js"></script>
 	<!--   END Controllers -->
@@ -184,7 +187,7 @@
 						<th colspan="3">GPS Boundaries</th>
 					</tr>
 					</thead>
-					<tbody>
+					<tbody id="fenceTBody">
 					<!--Start Normal Row -->
 					<tr class="trNormalGps">
 						<td>Circle</td>
@@ -195,10 +198,12 @@
 						<td colspan="2">Lat\Long: <strong>40.123456\-111.343456</strong></td>
 					</tr>
 					<!--  END Normal Row -->
+					<!-- START Row Spacer -->
 					<tr>
 						<td class="rowSpacer" colspan="3"></td>
 					</tr>
-					<!--Start Normal Row -->
+					<!--   END Row Spacer -->
+					<!--START Alternate Row -->
 					<tr class="trAltGps">
 						<td>Circle</td>
 						<td>Radius: <strong>200ft</strong></td>
@@ -207,7 +212,7 @@
 					<tr class="trAltGps">
 						<td colspan="2">Lat\Long: <strong>40.123456\-111.343456</strong></td>
 					</tr>
-					<!--  END Normal Row -->
+					<!--  END Alternate Row -->
 					<tr>
 						<td class="rowSpacer" colspan="3"></td>
 					</tr>

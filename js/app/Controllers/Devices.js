@@ -128,15 +128,7 @@ Ext.define("SOS.Controllers.Devices",
 				alert("The following error was encountered: \n" + oResponse.Message);
 				return;
 			}
-			debugger;
 			console.log(oResponse);
-			/** Load Google map. */
-			var oOptions = {
-				latitude: 40.31907001347657
-				, longitude: -111.67569100000003
-			};
-
-			SOS.Gps.Maps.initialize(oOptions);
 
 			/** Show account information. */
 			SOS.Sliders.GpsInfoSlider.Init(oResponse.Value);
@@ -184,13 +176,29 @@ Ext.define("SOS.Controllers.Devices",
 			/** Initialize. */
 			console.log("eventDetailsResult", eventDetailsResult);
 			var oModel = eventDetailsResult.Value;
-			var oOptions = { AccountID: eventDetailsResult}
+			var oOptions = { AccountID: oModel.AccountId};
 
 			/** Set return handlers. */
 			function fxSuccess(oResponse)
 			{
 				if (oResponse.Code === 0)
 				{
+					SOS.Views.GpsFenceList.BindToList(oResponse.Value);
+
+					/** Load Google map. */
+					var oOptions = {
+						latitude: 40.31907001347657
+						, longitude: -111.67569100000003
+					};
+
+					SOS.Gps.Maps.initialize(oOptions);
+					SOS.Gps.Maps.CenterMapFromAddress(
+						eventDetailsResult.Value.StreetAddress
+						, eventDetailsResult.Value.City
+						, eventDetailsResult.Value.StateId
+						, eventDetailsResult.Value.PostalCode
+					);
+					SOS.Gps.Maps.PaintGeoFences(oResponse.Value);
 
 				}
 			}
