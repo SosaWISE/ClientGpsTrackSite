@@ -14,13 +14,13 @@ SOS.Views.GpsFenceList = (function ()
 	/** START Member Variables. */
 	var _FENCE_TBODY_EL = "#fenceTBody";
 	var _ROW_NORMAL = '					<!--Start Normal Row -->'
-		+ '					<tr class="trNormalGps">'
-		+ '						<td>{0}</td>'
+		+ '					<tr data-id="gfid-{0}" class="trNormalGps trFenceItem">'
 		+ '						<td>{1}</td>'
+		+ '						<td>{2}</td>'
 		+ '						<td class="rowPointerGps" rowspan="2"></td>'
 		+ '					</tr>'
-		+ '					<tr class="trNormalGps">'
-		+ '						<td colspan="2">Lat&#92;Long: <strong>{2}</strong></td>'
+		+ '					<tr data-id="gfid-{0}" class="trNormalGps trFenceItem">'
+		+ '						<td colspan="2">Lat&#92;Long: <strong>{3}</strong></td>'
 		+ '					</tr>'
 		+ '					<!--  END Normal Row -->';
 	var _ROW_SPACER = '					<!-- START Row Spacer -->' +
@@ -29,13 +29,13 @@ SOS.Views.GpsFenceList = (function ()
 		'					</tr>' +
 		'					<!--   END Row Spacer -->';
 	var _ROW_ALTERN = '					<!--START Alternate Row -->' +
-		'					<tr class="trAltGps">' +
-		'						<td>{0}</td>' +
+		'					<tr data-id="gfid-{0}" class="trAltGps trFenceItem">' +
 		'						<td>{1}</td>' +
+		'						<td>{2}</td>' +
 		'						<td class="rowPointerGps" rowspan="2"></td>' +
 		'					</tr>' +
-		'					<tr class="trAltGps">' +
-		'						<td colspan="2">Lat&#92;Long: <strong>{2}</strong></td>' +
+		'					<tr data-id="gfid-{0}" class="trAltGps trFenceItem">' +
+		'						<td colspan="2">Lat&#92;Long: <strong>{3}</strong></td>' +
 		'					</tr>' +
 		'					<!--  END Alternate Row -->';
 	/**   END Member Variables. */
@@ -77,12 +77,45 @@ SOS.Views.GpsFenceList = (function ()
 				}
 
 				htmlOutput += $.validator.format(htmlTemplate
+					, item.GeoFenceID
 					, fenceType
 					, center
 					, coordinates);
 			});
 			console.log("Here is the output: ", htmlOutput);
 			$(_FENCE_TBODY_EL).html(htmlOutput);
+			$("tr.trFenceItem", _FENCE_TBODY_EL).bind('click', function (e)
+			{
+				/** Show Event in console. */
+				console.log("Fence Clicked.", e);
+
+				/** Get the GeoFenceID. */
+				var nGeoFenceID = $(e.currentTarget).attr("data-id").replace("gfid-", "");
+				/** Remover Edit mode from all GeoObjects. */
+				SOS.Views.GpsFenceList.StopAllEdit();
+				/** Pane map to center of the fence. */
+				SOS.Gps.Maps.CurrentMap.panTo(SOS.Gps.Maps.FenceTable[nGeoFenceID].Centroid);
+				if (SOS.Gps.Maps.FenceTable[nGeoFenceID].Type === "POLYGON")
+				{
+					/** Set the Fence to Edit mode. */
+					SOS.Gps.Maps.FenceTable[nGeoFenceID].Geometry.runEdit(true);
+				}
+			});
+		}
+		/**
+		 * Resets all the objects in normal mode.
+		 */
+		, StopAllEdit: function ()
+		{
+			$.each(SOS.Gps.Maps.FenceTable, function (index, geoObject)
+			{
+				switch(SOS.Gps.Maps.FenceTable[index].Type)
+				{
+					case "POLYGON":
+						SOS.Gps.Maps.FenceTable[index].Geometry.stopEdit(true);
+						break;
+				}
+			});
 		}
 	};
 	/**   END Member Functions. */
