@@ -95,10 +95,17 @@ SOS.Views.GpsFenceList = (function ()
 				SOS.Views.GpsFenceList.StopAllEdit();
 				/** Pane map to center of the fence. */
 				SOS.Gps.Maps.CurrentMap.panTo(SOS.Gps.Maps.FenceTable[nGeoFenceID].Centroid);
-				if (SOS.Gps.Maps.FenceTable[nGeoFenceID].Type === "POLYGON")
+				switch(SOS.Gps.Maps.FenceTable[nGeoFenceID].Type)
 				{
-					/** Set the Fence to Edit mode. */
-					SOS.Gps.Maps.FenceTable[nGeoFenceID].Geometry.runEdit(true);
+					case "POINT":
+						break;
+					case "POLYGON":
+						/** Set the Fence to Edit mode. */
+						SOS.Gps.Maps.FenceTable[nGeoFenceID].Geometry.runEdit(true);
+						break;
+					case "CIRCLE":
+						SOS.Gps.Maps.CircleRunEdit(nGeoFenceID);
+						break;
 				}
 			});
 		}
@@ -113,6 +120,9 @@ SOS.Views.GpsFenceList = (function ()
 				{
 					case "POLYGON":
 						SOS.Gps.Maps.FenceTable[index].Geometry.stopEdit(true);
+						break;
+					case "CIRCLE":
+						SOS.Gps.Maps.CircleStopEdit(index);
 						break;
 				}
 			});
