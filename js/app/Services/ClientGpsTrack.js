@@ -441,4 +441,41 @@ Ext.define("SOS.Services.ClientGpsTrack",
 			, error:fxFailure
 		});
 	}
+	, SaveCircleFence: function (params, afxSuccess, afxFailure)
+	{
+		/** Initialize. */
+		var oData = {};
+		function fxSuccess(oResponse) { if (afxSuccess) afxSuccess(oResponse); }
+		function fxFailure(oResponse) { if (afxFailure) afxFailure(oResponse); }
+
+		/** Check Arguments. */
+		if (params === undefined)
+		{
+			alert("Please pass params argument.");
+			return;
+		}
+		if (params.GeoFenceID === undefined)
+		{
+			alert("Please pass a GeoFenceID property.");
+			return;
+		}
+		/** Setup the data argument. */
+		oData.lGeoFenceID = params.GeoFenceID;
+		oData.fRadius = params.radius;
+		oData.fCenterLattitude = params.centerLattitude;
+		oData.fCenterLongitude = params.centerLongitude;
+		var sJson = JSON.stringify(oData);
+
+		/** Execute query. */
+		return $.ajax({
+			url: SOS.Config.ClientGpsTrackSrvUrl() + "GeoCircleSave"
+			, data: sJson
+			, type: "POST"
+			, dataType: "json"
+			, crossDomain: true
+			, contentType: 'application/json'
+			, success: fxSuccess
+			, failure: fxFailure
+		});
+	}
 });

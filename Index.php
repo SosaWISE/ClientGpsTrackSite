@@ -52,6 +52,7 @@
 	<!--   END Models -->
 	<!-- START Views -->
 	<script type="text/javascript" src="js/app/Views/GpsFenceList.js"></script>
+	<script type="text/javascript" src="js/app/Views/GeoToolbar.js.js"></script>
 	<!--   END Views -->
 	<!-- START Controllers -->
 	<script type="text/javascript" src="js/app/Controllers/Devices.js"></script>
@@ -93,7 +94,7 @@
 						<tr>
 							<td class="fieldTitle">N</td>
 							<td class="fieldValue">Andres Sosa</td>
-							<td rowspan="3"><img src="/images/Picture.png" style="width: 50px;"/></td>
+							<td rowspan="3"><img src="/images/Picture.png" style="width: 50px;" alt="Andres Sosa"/></td>
 						</tr>
 						<tr>
 							<td class="fieldTitle">A</td>
@@ -259,18 +260,19 @@
 			</div>
 			<div id="map_canvas">Maps Goes Here</div>
 			<div class="toolsMenu cf">
+				<div id="btnSaveGeometries" class="btnMain btnToolBullsEye"></div>
 				<div class="btnMain btnToolBullsEye"></div>
 				<div class="btnMain btnToolCircle"></div>
 				<div class="btnMain btnToolPolygon"></div>
 				<div id="devOptions" class="devOptions">
-					<select id="toolchoice" name="toolchoice" style="border:1px solid #000000;" onchange="SOS.Gps.Maps.setTool();">
-						<option value="3">Rectangle</option>
-						<option value="4" selected="">Circle</option>
-					</select>
-					<select id="overPos">
-						<option>LngLat mousemove</option>
-						<option selected="selected">LatLng mousemove</option>
-					</select>
+<!--					<select id="toolchoice" name="toolchoice" style="border:1px solid #000000;" onchange="SOS.Gps.Maps.setTool();">-->
+<!--						<option value="3">Rectangle</option>-->
+<!--						<option value="4" selected="">Circle</option>-->
+<!--					</select>-->
+<!--					<select id="overPos">-->
+<!--						<option>LngLat mousemove</option>-->
+<!--						<option selected="selected">LatLng mousemove</option>-->
+<!--					</select>-->
 				</div>
 			</div>
 		</div>
