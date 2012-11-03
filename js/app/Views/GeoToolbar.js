@@ -14,15 +14,13 @@ SOS.Views.GeoToolbar = (function (){
 	    var _SAVE_GEOMETRIES_BTN_EL = "#btnSaveGeometries";
 		var _onSaveGeometriesClickEvent;
 	/**   END Private Member Variables. */
-
 	/** START Bind Event Handlers to Elements. */
-	function onSaveGeometriesClickEvent()
-	{
-		if (_onSaveGeometriesClickEvent) _onSaveGeometriesClickEvent();
-	}
-	$(_SAVE_GEOMETRIES_BTN_EL).click(onSaveGeometriesClickEvent);
-
+		var onSaveGeometriesClickEvent = function ()
+		{
+			if (_onSaveGeometriesClickEvent) _onSaveGeometriesClickEvent();
+		}
 	/**   END Bind Event Handlers to Elements. */
+
 
 	return {
 		/** START Public Member Variables. */
@@ -30,7 +28,12 @@ SOS.Views.GeoToolbar = (function (){
 		/**   END Public Member Variables. */
 
 		/** START Public Member Functions. */
-		OnClickSaveGeometries: function (fxHandler)
+		Init: function ()
+		{
+			$(_SAVE_GEOMETRIES_BTN_EL).click(onSaveGeometriesClickEvent);
+		}
+
+		, OnClickSaveGeometries: function (fxHandler)
 		{
 			_onSaveGeometriesClickEvent = fxHandler;
 		}

@@ -42,7 +42,9 @@ Ext.define("SOS.AppService",
 
 		/** Normal authentication. */
 		$.when(SOS.AppService.SessionStart())
-			.done(SOS.AppService.LoadExtFiles);
+			.done(SOS.AppService.LoadExtFiles)
+			.done(SOS.Views.GeoToolbar.Init);
+
 	}
 
 	/*******************************************************************************************************************

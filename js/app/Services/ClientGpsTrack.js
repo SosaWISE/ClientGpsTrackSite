@@ -383,9 +383,7 @@ Ext.define("SOS.Services.ClientGpsTrack",
 			, type:"POST"
 			, dataType:"json"
 			, crossDomain: true
-			, xhrFields: {
-					withCredentials: true
-				}
+			, xhrFields: { withCredentials: true }
 			, contentType:'application/json'
 			, success:fxSuccess
 			, error:fxFailure
@@ -473,6 +471,7 @@ Ext.define("SOS.Services.ClientGpsTrack",
 			, type: "POST"
 			, dataType: "json"
 			, crossDomain: true
+			, xhrFields: { withCredentials: true }
 			, contentType: 'application/json'
 			, success: fxSuccess
 			, failure: fxFailure

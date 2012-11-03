@@ -52,7 +52,7 @@
 	<!--   END Models -->
 	<!-- START Views -->
 	<script type="text/javascript" src="js/app/Views/GpsFenceList.js"></script>
-	<script type="text/javascript" src="js/app/Views/GeoToolbar.js.js"></script>
+	<script type="text/javascript" src="js/app/Views/GeoToolbar.js"></script>
 	<!--   END Views -->
 	<!-- START Controllers -->
 	<script type="text/javascript" src="js/app/Controllers/Devices.js"></script>
