@@ -15,6 +15,9 @@ Ext.define("SOS.Controllers.Devices",
 	singleton: true
 
 	/** START Member Properties. */
+	, CurrentDevice: {}
+	, AccountID: null
+	, CustomerID: null
 	, DeviceList: []
 	, DeviceListEl: {}
 	, CustomerMasterFileID: null
@@ -32,6 +35,9 @@ Ext.define("SOS.Controllers.Devices",
 	, Init: function(options)
 	{
 		/** Initialize. */
+		SOS.Controllers.Devices.CurrentDevice = {};
+		SOS.Controllers.Devices.AccountID = null;
+		SOS.Controllers.Devices.CustomerID = null;
 		SOS.Controllers.Devices.DeviceListEl = $(".deviceList");
 		SOS.Controllers.Devices.CustomerMasterFileID = options.CustomerMasterFileID;
 		SOS.Controllers.Devices.DeviceListEl.html("");
@@ -58,7 +64,7 @@ Ext.define("SOS.Controllers.Devices",
 			$.each(oResponse.Value, function (nIndex, oItem)
 			{
 				/** Add to device list. */
-				SOS.Controllers.Devices.DeviceList[nIndex] = oItem;
+				SOS.Controllers.Devices.DeviceList[oItem.AccountId] = oItem;
 
 				/** Check to see what type of device it is. */
 				switch (oItem.PanelTypeId)
@@ -112,6 +118,8 @@ Ext.define("SOS.Controllers.Devices",
 		var oEl = $(e.currentTarget);
 		var lAccountID = $(e.currentTarget).attr("data-id").replace("dId-", "");
 		var lCustomerId = $(e.currentTarget).attr("data-idid").replace("cId-", "");
+		SOS.Controllers.Devices.AccountID = lAccountID;
+		SOS.Controllers.Devices.CustomerID = lCustomerId;
 
 		console.log("Button Click on Device Icon:", oEl, lAccountID, lCustomerId);
 

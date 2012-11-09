@@ -337,6 +337,52 @@ Ext.define("SOS.Services.ClientGpsTrack",
 		});
 	}
 
+	, SaveGeoPoint: function (oParams, afxSuccess, afxFailure)
+	{
+		/** Initialize. */
+		var oData = {};
+		function fxSuccess(oResponse) { if (afxSuccess) afxSuccess(oResponse); }
+		function fxFailure(oResponse) { if (afxFailure) afxFailure(oResponse); }
+
+		/** Check arguments. */
+		if (oParams === undefined)
+		{
+			alert("Please pass oParams");
+			return null;
+		}
+		if (oParams.AccountId === undefined)
+		{
+			alert("Please pass an AccountId.");
+			return null;
+		}
+		if (oParams.PlaceName === undefined) {oParams.PlaceName = '[Not Enabled]';}
+		if (oParams.PlaceDescription === undefined) {oParams.PlaceDescription = '[Not Enabled]';}
+		if (oParams.Lattitude === undefined)
+		{
+			alert("Please enter a Latitude position for the point.");
+		}
+		if (oParams.Longitude === undefined)
+		{
+			alert("Please enter a Longitude position for the point.");
+		}
+		/** Create arguments. */
+		oData.lAccountID = oParams.AccountID;
+		var oJson = JSON.stringify(oData);
+
+		/** Return header. */
+		return $.ajax({
+			url:SOS.Config.ClientGpsTrackSrvUrl() + "GeoPointSave"
+			, data:oJson
+			, type:"POST"
+			, dataType:"json"
+			, crossDomain: true
+			, xhrFields: { withCredentials: true }
+			, contentType:'application/json'
+			, success:fxSuccess
+			, error:fxFailure
+		});
+	}
+
 	, SavePolygonFence: function (oParams, afxSuccess, afxFailure)
 	{
 		/** Initialize. */
@@ -439,6 +485,7 @@ Ext.define("SOS.Services.ClientGpsTrack",
 			, error:fxFailure
 		});
 	}
+
 	, SaveCircleFence: function (params, afxSuccess, afxFailure)
 	{
 		/** Initialize. */
