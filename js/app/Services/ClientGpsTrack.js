@@ -365,8 +365,14 @@ Ext.define("SOS.Services.ClientGpsTrack",
 		{
 			alert("Please enter a Longitude position for the point.");
 		}
+
 		/** Create arguments. */
-		oData.lAccountID = oParams.AccountID;
+		oData.lGeoFenceID = oParams.GeoFenceID;
+		oData.lAccountId = oParams.AccountId;
+		oData.sPlaceName = oParams.PlaceName;
+		oData.sPlaceDescription = oParams.PlaceDescription;
+		oData.sLattitude = oParams.Lattitude;
+		oData.sLongitude = oParams.Longitude;
 		var oJson = JSON.stringify(oData);
 
 		/** Return header. */
@@ -514,6 +520,55 @@ Ext.define("SOS.Services.ClientGpsTrack",
 		/** Execute query. */
 		return $.ajax({
 			url: SOS.Config.ClientGpsTrackSrvUrl() + "GeoCircleSave"
+			, data: sJson
+			, type: "POST"
+			, dataType: "json"
+			, crossDomain: true
+			, xhrFields: { withCredentials: true }
+			, contentType: 'application/json'
+			, success: fxSuccess
+			, failure: fxFailure
+		});
+	}
+	, SaveRectangleFence: function (params, afxSuccess, afxFailure)
+	{
+		/** Initialize. */
+		var oData = {};
+		function fxSuccess(oResponse) { if (afxSuccess) afxSuccess(oResponse); }
+		function fxFailure(oResponse) { if (afxFailure) afxFailure(oResponse); }
+
+		/** Check Arguments. */
+		if (params === undefined)
+		{
+			alert("Please pass params argument.");
+			return;
+		}
+		if (params.GeoFenceID === undefined && params.AccountId === undefined)
+		{
+			alert("Confused.  By passing GeoFenceID it will do an update.  If GeoFenceID is missing then it will do a create.  However it appears that AccountID is missing.");
+			return;
+		}
+		if (params.MaxLattitude === undefined
+			|| params.MaxLongitude == undefined
+			|| params.MinLattitude == undefined
+			|| params.MinLongitude == undefined)
+		{
+			alert("One of the coordinates is not defined.");
+			return;
+		}
+
+		/** Setup the data argument. */
+		oData.lGeoFenceID = params.GeoFenceID;
+		oData.lAccountId = params.AccountId;
+		oData.dMaxLattitude = params.MaxLattitude;
+		oData.dMinLongitude = params.MinLongitude;
+		oData.dMaxLongitude = params.MaxLongitude;
+		oData.dMinLattitude = params.MinLattitude;
+		var sJson = JSON.stringify(oData);
+
+		/** Execute query. */
+		return $.ajax({
+			url: SOS.Config.ClientGpsTrackSrvUrl() + "GeoRectangleSave"
 			, data: sJson
 			, type: "POST"
 			, dataType: "json"

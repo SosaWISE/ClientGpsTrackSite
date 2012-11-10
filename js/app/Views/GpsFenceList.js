@@ -52,6 +52,7 @@ SOS.Views.GpsFenceList = (function ()
 				/** Initialize. */
 				var htmlTemplate = (index % 2) === 0 ? _ROW_NORMAL : _ROW_ALTERN;
 				var fenceType, center, coordinates;
+
 				switch(item.GeoFenceTypeId)
 				{
 					case "POLY":
@@ -61,7 +62,7 @@ SOS.Views.GpsFenceList = (function ()
 						break;
 					case "CIR":
 						fenceType = "Circle";
-						center = "Radius: " + item.Radius;
+						center = "Radius: " + item.Radius.toFixed(2) + " meter";
 						coordinates = $.validator.format("{0}&#92;{1}", item.CenterLattitude.toFixed(6) || "", item.CenterLongitude.toFixed(6) || "");
 						break;
 					case "PNT":
@@ -69,9 +70,9 @@ SOS.Views.GpsFenceList = (function ()
 						center = "Point: " + item.Radius;
 						coordinates = $.validator.format("{0}&#92;{1}", item.PointLatitude.toFixed(6) || "", item.PointLongitude.toFixed(6) || "");
 						break;
-					default:
+					case "RECT":
 						fenceType = item.GeoFenceType;
-						center = "";
+						center = "Area: " + item.Area.toFixed(2) + " sq meter";
 						coordinates = $.validator.format("{0}&#92;{1}", item.MeanLattitude.toFixed(6) || "", item.MeanLongitude.toFixed(6) || "");
 						break;
 				}
@@ -106,6 +107,9 @@ SOS.Views.GpsFenceList = (function ()
 					case "CIRCLE":
 						SOS.Gps.Maps.CircleRunEdit(nGeoFenceID);
 						break;
+					case "RECTANGLE":
+						SOS.Gps.Maps.FenceTable[nGeoFenceID].Geometry.setEditable(true);
+						break;
 				}
 			});
 		}
@@ -123,6 +127,10 @@ SOS.Views.GpsFenceList = (function ()
 						break;
 					case "CIRCLE":
 						SOS.Gps.Maps.CircleStopEdit(index);
+						break;
+					case "RECTANGLE":
+						//SOS.Gps.Maps.RectangleStopEdit(index);
+						SOS.Gps.Maps.FenceTable[index].Geometry.setEditable(false);
 						break;
 				}
 			});
