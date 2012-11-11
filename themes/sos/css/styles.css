@@ -130,6 +130,18 @@ div.btnProperties:hover {
 	background: transparent url('../img/Buttons/settings_hover.png') no-repeat;
 }
 
+div.btnToolSave {
+	background: transparent url('../img/Buttons/SaveGpsGeometries.png') no-repeat;
+	width: 285px;
+}
+div.btnToolSaveDisabled {
+	background: transparent url('../img/Buttons/SaveGpsGeometriesDisabled.png') no-repeat;
+	width: 285px;
+}
+div.btnToolSave:Hover {
+	background: transparent url('../img/Buttons/SaveGpsGeometriesHover.png') no-repeat;
+	width: 285px;
+}
 div.btnToolBullsEye {
 	background: transparent url('../img/Buttons/bullsEye.png') no-repeat;
 }

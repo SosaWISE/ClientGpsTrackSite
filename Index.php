@@ -260,7 +260,7 @@
 			</div>
 			<div id="map_canvas">Maps Goes Here</div>
 			<div class="toolsMenu cf">
-				<div id="btnSaveGeometries" class="btnMain btnToolBullsEye"></div>
+				<div id="btnSaveGeometries" class="btnMain btnToolSaveDisabled"></div>
 				<div class="btnMain btnToolBullsEye"></div>
 				<div class="btnMain btnToolCircle"></div>
 				<div class="btnMain btnToolPolygon"></div>

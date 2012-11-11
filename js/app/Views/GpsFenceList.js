@@ -129,7 +129,6 @@ SOS.Views.GpsFenceList = (function ()
 						SOS.Gps.Maps.CircleStopEdit(index);
 						break;
 					case "RECTANGLE":
-						//SOS.Gps.Maps.RectangleStopEdit(index);
 						SOS.Gps.Maps.FenceTable[index].Geometry.setEditable(false);
 						break;
 				}

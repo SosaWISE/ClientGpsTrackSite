@@ -38,5 +38,15 @@ SOS.Views.GeoToolbar = (function (){
 			_onSaveGeometriesClickEvent = fxHandler;
 		}
 		/**   END Public Member Functions. */
+		, EnableSaveGeometriesButton: function ()
+		{
+			if ($('.btnToolSaveDisabled'))
+				$(_SAVE_GEOMETRIES_BTN_EL).addClass('btnToolSave').removeClass('btnToolSaveDisabled');
+		}
+		, DisableSaveGeometriesButton: function ()
+		{
+			if ($('.btnToolSave'))
+				$(_SAVE_GEOMETRIES_BTN_EL).addClass('btnToolSaveDisabled').removeClass('btnToolSave');
+		}
 	};
 })();
