@@ -22,12 +22,12 @@ Ext.define("SOS.Controllers.Devices",
 	, DeviceListEl: {}
 	, CustomerMasterFileID: null
 	, DeviceElList: {
-			Medical: '<div data-id="dId-{0}" data-idid="cId-{1}" class="btnMedicalTracker btnMain">{2}</div>',
-			Kid:     '<div data-id="dId-{0}" data-idid="cId-{1}" class="btnKidTracker btnMain">{2}</div>',
-			Car:     '<div data-id="dId-{0}" data-idid="cId-{1}" class="btnCarTracker btnMain">{2}</div>',
-			Pet:     '<div data-id="dId-{0}" data-idid="cId-{1}" class="btnPetTracker btnMain">{2}</div>',
-			Home:    '<div data-id="dId-{0}" data-idid="cId-{1}" class="btnHomeSecurity btnMain">{2}</div>',
-			Exercise:'<div data-id="dId-{0}" data-idid="cId-{1}" class="btnExercise btnMain">{2}</div>'
+			Medical: '<div data-id="dId-{0}" data-idid="cId-{1}" class="btnMedicalTracker btnMain btnFont">{2}</div>',
+			Kid:     '<div data-id="dId-{0}" data-idid="cId-{1}" class="btnKidTracker btnMain btnFont">{2}</div>',
+			Car:     '<div data-id="dId-{0}" data-idid="cId-{1}" class="btnCarTracker btnMain btnFont">{2}</div>',
+			Pet:     '<div data-id="dId-{0}" data-idid="cId-{1}" class="btnPetTracker btnMain btnFont">{2}</div>',
+			Home:    '<div data-id="dId-{0}" data-idid="cId-{1}" class="btnHomeSecurity btnMain btnFont">{2}</div>',
+			Exercise:'<div data-id="dId-{0}" data-idid="cId-{1}" class="btnExercise btnMain btnFont">{2}</div>'
 		}
 	/**   END Member Properties. */
 
@@ -65,7 +65,7 @@ Ext.define("SOS.Controllers.Devices",
 			{
 				/** Add to device list. */
 				SOS.Controllers.Devices.DeviceList[oItem.AccountId] = oItem;
-
+				debugger;
 				/** Check to see what type of device it is. */
 				switch (oItem.PanelTypeId)
 				{

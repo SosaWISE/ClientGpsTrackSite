@@ -93,7 +93,7 @@ SOS.Views.GpsFenceList = (function ()
 				/** Get the GeoFenceID. */
 				var nGeoFenceID = $(e.currentTarget).attr("data-id").replace("gfid-", "");
 				/** Remover Edit mode from all GeoObjects. */
-				SOS.Views.GpsFenceList.StopAllEdit();
+				SOS.Gps.Maps.StopAllEdit();
 				/** Pane map to center of the fence. */
 				SOS.Gps.Maps.CurrentMap.panTo(SOS.Gps.Maps.FenceTable[nGeoFenceID].Centroid);
 				switch(SOS.Gps.Maps.FenceTable[nGeoFenceID].Type)
@@ -109,27 +109,6 @@ SOS.Views.GpsFenceList = (function ()
 						break;
 					case "RECTANGLE":
 						SOS.Gps.Maps.FenceTable[nGeoFenceID].Geometry.setEditable(true);
-						break;
-				}
-			});
-		}
-		/**
-		 * Resets all the objects in normal mode.
-		 */
-		, StopAllEdit: function ()
-		{
-			$.each(SOS.Gps.Maps.FenceTable, function (index, geoObject)
-			{
-				switch(SOS.Gps.Maps.FenceTable[index].Type)
-				{
-					case "POLYGON":
-						SOS.Gps.Maps.FenceTable[index].Geometry.stopEdit(true);
-						break;
-					case "CIRCLE":
-						SOS.Gps.Maps.CircleStopEdit(index);
-						break;
-					case "RECTANGLE":
-						SOS.Gps.Maps.FenceTable[index].Geometry.setEditable(false);
 						break;
 				}
 			});

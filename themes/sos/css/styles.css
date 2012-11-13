@@ -77,6 +77,12 @@ div.mainBodyDiv {
 	display: inline-block;
 	cursor: pointer;
 }
+.btnFont {
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	text-align: center;
+    line-height: 1.5em;
+}
 div.btnInformation {
 	background: transparent url('../img/Buttons/information.png') no-repeat;
 }
@@ -143,7 +149,20 @@ div.btnToolSave:Hover {
 	width: 285px;
 }
 div.btnToolBullsEye {
-	background: transparent url('../img/Buttons/bullsEye.png') no-repeat;
+	background: transparent url('../img/Buttons/LocateDevice.png') no-repeat;
+	width: 224px;
+}
+div.btnToolBullsEye:Hover {
+	background: transparent url('../img/Buttons/LocateDeviceHover.png') no-repeat;
+	width: 224px;
+}
+div.btnToolNewGeoFence {
+	background: transparent url('../img/Buttons/NewGeoFence.png') no-repeat;
+	width: 224px;
+}
+div.btnToolNewGeoFence:Hover {
+	background: transparent url('../img/Buttons/NewGeoFenceHover.png') no-repeat;
+	width: 224px;
 }
 div.btnToolCircle {
 	background: transparent url('../img/Buttons/circle.png') no-repeat;
