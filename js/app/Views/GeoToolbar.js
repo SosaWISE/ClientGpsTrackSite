@@ -11,14 +11,20 @@ Ext.ns("SOS.Views");
 
 SOS.Views.GeoToolbar = (function (){
 	/** START Private Member Variables. */
-	    var _SAVE_GEOMETRIES_BTN_EL = "#btnSaveGeometries";
-		var _onSaveGeometriesClickEvent;
+	var _SAVE_GEOMETRIES_BTN_EL = "#btnSaveGeometries";
+	var _NEW_GEOFENCE_BTN_EL = "#btnNewGeoFence";
+	var _onSaveGeometriesClickEvent;
+	var _onNewGeoFenceClickEvent;
 	/**   END Private Member Variables. */
 	/** START Bind Event Handlers to Elements. */
-		var onSaveGeometriesClickEvent = function ()
-		{
-			if (_onSaveGeometriesClickEvent) _onSaveGeometriesClickEvent();
-		}
+	var onSaveGeometriesClickEvent = function ()
+	{
+		if (_onSaveGeometriesClickEvent) _onSaveGeometriesClickEvent();
+	}
+	var onNewGeoFenceClickEvent = function ()
+	{
+		if (_onNewGeoFenceClickEvent) _onNewGeoFenceClickEvent();
+	}
 	/**   END Bind Event Handlers to Elements. */
 
 
@@ -31,12 +37,19 @@ SOS.Views.GeoToolbar = (function (){
 		Init: function ()
 		{
 			$(_SAVE_GEOMETRIES_BTN_EL).click(onSaveGeometriesClickEvent);
+			$(_NEW_GEOFENCE_BTN_EL).click(onNewGeoFenceClickEvent);
 		}
 
 		, OnClickSaveGeometries: function (fxHandler)
 		{
 			_onSaveGeometriesClickEvent = fxHandler;
 		}
+
+		, OnNewGeoFenceClickEvent: function (fxHandler)
+		{
+			_onNewGeoFenceClickEvent = fxHandler;
+		}
+
 		/**   END Public Member Functions. */
 		, EnableSaveGeometriesButton: function ()
 		{

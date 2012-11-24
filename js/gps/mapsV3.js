@@ -11,12 +11,30 @@ Ext.ns("SOS.Gps");
 SOS.Gps.Maps = (function ()
 {
 	/** START MEMBER Variables */
+	/** ** START CONSTANTS */
+	var _STD_GEO_REC_DIVIATION = .01;
+
+	/** ** END CONSTANTS */
 	var _geocoder;
 	var _currentMap;
 	var _fenceHashTable = {};
 	/**   END MEMBER Variables */
 
 	/** START MEMBER Functions */
+	/** ** START Private MEMBER Functions */
+	function _getNumberOfFences()
+	{
+		/** Initialize. */
+		var resultCount = 0;
+		$.each(_fenceHashTable, function ()
+		{
+			resultCount++;
+		});
+
+		/** Return result. */
+		return resultCount;
+	}
+	/** **   END Private MEMBER Functions */
 	return {
 		initialize: function (oOptions)
 		{
@@ -35,6 +53,7 @@ SOS.Gps.Maps = (function ()
 
 			/** Bind actions to events on toolbar. */
 			SOS.Views.GeoToolbar.OnClickSaveGeometries(this.SaveGeometries);
+			SOS.Views.GeoToolbar.OnNewGeoFenceClickEvent(this.NewGeoFence);
 		}
 
 		, CenterMapFromAddress: function (street, city, state, zip)
@@ -145,7 +164,7 @@ SOS.Gps.Maps = (function ()
 								, strokeOpacity: 0.6
 								, strokeWeight: 4
 								, bounds: new google.maps.LatLngBounds(swLatLng, neLatLng)
-								, editable: true
+								//, editable: true
 							})
 							, IsDirty: false
 						};
@@ -305,16 +324,17 @@ SOS.Gps.Maps = (function ()
 				alert("Failure on saving Point.");
 			}
 
+			debugger;
 			/** Create params. */
 			var pointNE = fenceItem.Geometry.getBounds().getNorthEast();
-			var pointWS = fenceItem.Geometry.getBounds().getSouthWest();
+			var pointSW = fenceItem.Geometry.getBounds().getSouthWest();
 			var params = {
 				GeoFenceID: fenceItem.GeoFenceID
 				, AccountId: SOS.Controllers.Devices.AccountID
-				, MaxLattitude: pointNE.Ya
-				, MaxLongitude: pointNE.Za
-				, MinLattitude: pointWS.Ya
-				, MinLongitude: pointWS.Za
+				, MaxLattitude: pointNE.lat()
+				, MaxLongitude: pointNE.lng()
+				, MinLattitude: pointSW.lat()
+				, MinLongitude: pointSW.lng()
 			};
 
 			/** Return hdr handler. */
@@ -385,6 +405,106 @@ SOS.Gps.Maps = (function ()
 
 			/** Execute services. */
 			SOS.Services.ClientGpsTrack.SaveCircleFence(params, fxSuccess, fxFailure);
+		}
+
+		, NewGeoFence: function ()
+		{
+			/** Check that there are no more than 5 fences. */
+			if (_fenceHashTable.length >= 5)
+			{
+				alert("Sorry you are only allowd 5 geo fences per this device.");
+				return;
+			}
+
+			/** Initialize. */
+			debugger;
+			var itemId = _getNumberOfFences() ? 0 - _fenceHashTable.length : 0;
+
+			/** Get center of the map. */
+			var ctrLatLng = _currentMap.getCenter();
+			var zoom = _currentMap.getZoom();
+
+			/** Create the bounds.  (x=Log; y=Lat) */
+			//var swLatLng = new google.maps.LatLng(item.MinLattitude, item.MinLongitude);
+			//var neLatLng = new google.maps.LatLng(item.MaxLattitude, item.MaxLongitude);
+			var swLatLng = new google.maps.LatLng(ctrLatLng.lat() - _STD_GEO_REC_DIVIATION, ctrLatLng.lng() - _STD_GEO_REC_DIVIATION);
+			var neLatLng = new google.maps.LatLng(ctrLatLng.lat() + _STD_GEO_REC_DIVIATION, ctrLatLng.lng() + _STD_GEO_REC_DIVIATION);
+			_fenceHashTable[itemId] ={
+				GeoFenceID: itemId
+				, Centroid: ctrLatLng
+				, Type: "RECTANGLE"
+				, Geometry: new google.maps.Rectangle ({
+					strokeColor: '#ff0000'
+					, strokeOpacity: 0.6
+					, strokeWeight: 4
+					, bounds: new google.maps.LatLngBounds(swLatLng, neLatLng)
+					, editable: true
+				})
+				, IsDirty: false
+			};
+			/** Add bound change listener. */
+			google.maps.event.addListener(_fenceHashTable[itemId].Geometry, 'bounds_changed'
+				, function() {
+					console.log('Rectangle has changed.');
+					_fenceHashTable[itemId].IsDirty = true;
+					SOS.Views.GeoToolbar.EnableSaveGeometriesButton();
+				});
+			_fenceHashTable[itemId].Geometry.setMap(_currentMap);
+
+		}
+
+		, PaintMarker: function (param)
+		{
+			/** Initialize. */
+			var iconOriginPoint = new google.maps.Point(0,0);
+			switch(param.EventTypeId)
+			{
+				case "EMERG":
+					iconOriginPoint = new google.maps.Point(0,0);
+					break;
+				case "FALL":
+					iconOriginPoint = new google.maps.Point(33,0);
+					break;
+				case "FENCE":
+					iconOriginPoint = new google.maps.Point(97,0);
+					break;
+				case "FENCE_RT":
+					iconOriginPoint = new google.maps.Point(65,0);
+					break;
+				case "LOWBAT":
+					iconOriginPoint = new google.maps.Point(161,0);
+					break;
+				case "MEDICAL":
+					iconOriginPoint = new google.maps.Point(0,0);
+					break;
+				case "SPEED":
+					iconOriginPoint = new google.maps.Point(129,0);
+					break;
+				case "TAMPER":
+					iconOriginPoint = new google.maps.Point(193,0);
+					break;
+			}
+
+			var options = {
+				animation: google.maps.Animation.DROP
+				, position: new google.maps.LatLng(param.Lattitude, param.Longitude)
+				, icon: {
+					origin: iconOriginPoint
+					, url: '/images/GoogleIconSprit.png'
+					, size: new google.maps.Size(32, 37)
+				}
+				, flat: false // This shows the icon shadow
+				, map: _currentMap
+				, title: '(' + param.EventID + ')' + param.EventName
+//				, shadow: {
+//					anchor: new google.maps.Point(20,50)
+//					, origin: new google.maps.Point(0,38)
+//					, url: '/images/GoogleIconSprit.png'
+//					, size: new google.maps.Size(47, 38)
+//				}
+				, visible: true
+			};
+			var marker = new google.maps.Marker(options);
 		}
 
 		/** START MEMBER Variables. */

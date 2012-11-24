@@ -28,13 +28,14 @@ SOS.Sliders.GpsInfoSlider = (function ()
 		+ '</tr>';
 	var DEVICE_EVENT_ROW_TEMPLATE = ''
 		+ '<!--Start Normal Row -->'
-		+ '<tr data-id="deviceId-{0}" class="{1}">'
-		+ '	<td class="eventDate">{2}</td>'
+		+ '<tr data-id="eventId-{0}" class="{1} trEventItem">'
+		+ '<td><strong>{0}</strong></td>'
 		+ '	<td class="eventName">{3}</td>'
 		+ '	<td class="rowPointer" rowspan="2"></td>'
 		+ '</tr>'
-		+ '<tr class="{1}">'
-		+ '	<td colspan="2">Lat: {4} | Lon: {5}</td>'
+		+ '<tr data-id="eventId-{0}" class="{1} trEventItem">'
+		+ '	<td colspan="2" class="eventDate">{2}</td>'
+		+ '	<!--<td colspan="2">Lat: {4} | Lon: {5}</td>-->'
 		+ '</tr>'
 		+ '<!--  END Normal Row -->';
 	var ROW_SPACER = ''
@@ -46,6 +47,8 @@ SOS.Sliders.GpsInfoSlider = (function ()
 	var sliderEl = $(sliderHandler);
 
 	var deviceEventTblBdyEl = "#deviceEventTblBdy";
+
+	var _eventHashList = {};
 
 	/**   END Private Members. */
 
@@ -74,13 +77,18 @@ SOS.Sliders.GpsInfoSlider = (function ()
 			/** Build rows. */
 			$.each(eventsList, function (nIndex, oValue)
 			{
+				/** Initialize. */
+				var eventDate = new Date(oValue.EventDate + ' UTC');
+				_eventHashList[oValue.EventID] = oValue;
+				_eventHashList[oValue.EventID].Centroid = new google.maps.LatLng(oValue.Lattitude, oValue.Longitude);
+
 				/** Add Spacer. */
-				if (nIndex > 0) {sHtml += ROW_SPACER;}
+				//if (nIndex > 0) {sHtml += ROW_SPACER;}
 				/** Add content. */
 				sHtml += $.validator.format(DEVICE_EVENT_ROW_TEMPLATE
 					, oValue.EventID
 					, (nIndex % 2) === 0 ? "trNormal" : "trAlt"
-					, oValue.EventDate
+					, eventDate.toString().replace(/GMT.*/g,"")
 					, oValue.EventName
 					, oValue.Lattitude
 					, oValue.Longitude
@@ -89,6 +97,38 @@ SOS.Sliders.GpsInfoSlider = (function ()
 
 			/** Insert rows to table. */
 			$(deviceEventTblBdyEl).html(sHtml);
+
+			/** Bind Click event to the row. */
+			$("tr.trEventItem", deviceEventTblBdyEl).bind('click', function(e)
+			{
+				/** Show Event in console. */
+				console.log("Event Clicked.", e);
+
+				var nEventID = $(e.currentTarget).attr("data-id").replace("eventId-", "");
+				/** Remover Edit mode from all GeoObjects. */
+				SOS.Gps.Maps.StopAllEdit();
+				/** Pane map to center of the fence. */
+				SOS.Gps.Maps.CurrentMap.panTo(_eventHashList[nEventID].Centroid);
+
+			});
+		}
+
+		, PaintEventsList: function (eventsList)
+		{
+			$.each(eventsList, function (index, eventItem)
+			{
+				/** Initialize. */
+				var eventDate = new Date(eventItem.EventDate + ' UTC');
+				var params = {
+					Lattitude: eventItem.Lattitude
+					, Longitude: eventItem.Longitude
+					, EventTypeId: eventItem.EventTypeId
+					, EventName: eventItem.EventName
+					, EventDate: eventDate.toString().replace(/GMT.*/g,"")
+					, EventID: eventItem.EventID
+				};
+				SOS.Gps.Maps.PaintMarker(params);
+			});
 		}
 	};
 	/**   END Member Functions. */

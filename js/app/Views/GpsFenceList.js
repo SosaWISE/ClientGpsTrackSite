@@ -83,7 +83,7 @@ SOS.Views.GpsFenceList = (function ()
 					, center
 					, coordinates);
 			});
-			console.log("Here is the output: ", htmlOutput);
+			//console.log("Here is the output: ", htmlOutput);
 			$(_FENCE_TBODY_EL).html(htmlOutput);
 			$("tr.trFenceItem", _FENCE_TBODY_EL).bind('click', function (e)
 			{

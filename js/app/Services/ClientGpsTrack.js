@@ -196,50 +196,50 @@ Ext.define("SOS.Services.ClientGpsTrack",
 	}
 
 	, GetDeviceDetailsJson: function (oParams, afxSuccess, afxFailure)
-{
-	/** Initialize. */
-	var oData = {};
-	function fxSuccess(oResponse) { if (afxSuccess) afxSuccess(oResponse); }
-	function fxFailure(oResponse) { if (afxFailure) afxFailure(oResponse); }
-
-	/** Check arguments. */
-	if (oParams === undefined)
 	{
-		alert("Please pass oParams");
-		return null;
-	}
-	if (oParams.AccountID === undefined)
-	{
-		alert("Please pass an AccountID.");
-		return null;
-	}
+		/** Initialize. */
+		var oData = {};
+		function fxSuccess(oResponse) { if (afxSuccess) afxSuccess(oResponse); }
+		function fxFailure(oResponse) { if (afxFailure) afxFailure(oResponse); }
 
-	if (oParams.CustomerID === undefined)
-	{
-		alert("Please pass a CustomerID.");
-		return null;
-	}
-
-	/** Build arguments. */
-	oData.lAccountID = oParams.AccountID;
-	oData.lCustomerID = oParams.CustomerID;
-	var oJson = JSON.stringify(oData);
-
-	/** Return header. */
-	return $.ajax({
-		url:SOS.Config.ClientGpsTrackSrvUrl() + "GetDeviceDetailsJson"
-		, data:oJson
-		, type:"POST"
-		, dataType:"json"
-		, crossDomain: true
-		, xhrFields: {
-			withCredentials: true
+		/** Check arguments. */
+		if (oParams === undefined)
+		{
+			alert("Please pass oParams");
+			return null;
 		}
-		, contentType:'application/json'
-		, success:fxSuccess
-		, error:fxFailure
-	});
-}
+		if (oParams.AccountID === undefined)
+		{
+			alert("Please pass an AccountID.");
+			return null;
+		}
+
+		if (oParams.CustomerID === undefined)
+		{
+			alert("Please pass a CustomerID.");
+			return null;
+		}
+
+		/** Build arguments. */
+		oData.lAccountID = oParams.AccountID;
+		oData.lCustomerID = oParams.CustomerID;
+		var oJson = JSON.stringify(oData);
+
+		/** Return header. */
+		return $.ajax({
+			url:SOS.Config.ClientGpsTrackSrvUrl() + "GetDeviceDetailsJson"
+			, data:oJson
+			, type:"POST"
+			, dataType:"json"
+			, crossDomain: true
+			, xhrFields: {
+				withCredentials: true
+			}
+			, contentType:'application/json'
+			, success:fxSuccess
+			, error:fxFailure
+		});
+	}
 
 	, GetDeviceEvents: function (oParams, afxSuccess, afxFailure)
 	{

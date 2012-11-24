@@ -65,7 +65,6 @@ Ext.define("SOS.Controllers.Devices",
 			{
 				/** Add to device list. */
 				SOS.Controllers.Devices.DeviceList[oItem.AccountId] = oItem;
-				debugger;
 				/** Check to see what type of device it is. */
 				switch (oItem.PanelTypeId)
 				{
@@ -167,6 +166,7 @@ Ext.define("SOS.Controllers.Devices",
 		{
 			console.log(oResponse.Value);
 			SOS.Sliders.GpsInfoSlider.buildSmallEventsList(oResponse.Value);
+			SOS.Sliders.GpsInfoSlider.PaintEventsList(oResponse.Value);
 		}
 		function fxFailure(oResponse)
 		{
