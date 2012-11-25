@@ -1,0 +1,219 @@
+/** cf allows the div to show all floating divs inside of it. */
+.cf:before,
+.cf:after {
+	content:"";
+	display:table;
+}
+.cf:after {
+	clear:both;
+}
+.cf {
+	zoom:1; /* For IE 6/7 (trigger hasLayout) */
+}
+body {
+	border-width: 0;
+	margin: 0;
+	background-color: rgba(127, 127, 127, 0.48);
+}
+div.ssLogo {
+	background-color: #D5D6DA;
+	display: inline-block;
+
+	position: relative;
+	left: 718px;
+	top: 5px;
+	width: 275px;
+	padding-left: 14px;
+
+	/** Drop shadow. */
+	-moz-box-shadow: 0 2px 4px 2px rgba(0, 0, 0, .5);
+	-webkit-box-shadow: 0 2px 4px 2px rgba(0, 0, 0, .5);
+	box-shadow: 0 2px 4px 2px rgba(0, 0, 0, .5);
+}
+div.mainRootDiv {
+	width: 1024px; height: 768px;
+	margin: auto;
+	background-color: #424242;
+
+	/** Drop shadow. */
+	-moz-box-shadow: 0 2px 4px 2px rgba(0, 0, 0, .5);
+	-webkit-box-shadow: 0 2px 4px 2px rgba(0, 0, 0, .5);
+	box-shadow: 0 2px 4px 2px rgba(0, 0, 0, .5);
+
+}
+div.mainHeaderDiv {
+	height: 56px;
+	width: 100%;
+	/** Webkit. */
+	background: -webkit-gradient(linear, left top, left bottom, from(#E8EAED), to(#5E5F60));
+	/** Firefox */
+	background: -moz-linear-gradient(top,  #E8EAED,  #5E5F60);
+	/** IE */
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#E8EAED', endColorstr='#5E5F60');
+}
+
+div.mainMenuDiv {
+	width: 56px; height:712px;
+	background-color: #e8eaed;
+	display: inline-block;
+	float: left;
+	position: relative;
+}
+
+div.mainBodyDiv {
+	width: 964px;
+	height: 710px;
+	display: inline-block;
+	/*background-color: yellow;*/
+	overflow: hidden;
+
+}
+
+/** Main Menu Buttons. */
+/** |- Information */
+.btnMain {
+	width:56px; height: 56px;
+	position: relative;
+	display: inline-block;
+	cursor: pointer;
+}
+div.btnInformation {
+	background: transparent url('../img/Buttons/information.png') no-repeat;
+}
+div.btnInformation:hover {
+	background: transparent url('../img/Buttons/information_hover.png') no-repeat;
+}
+div.btnAlerts {
+	background: transparent url('../img/Buttons/alerts.png') no-repeat;
+}
+div.btnAlerts:hover {
+	background: transparent url('../img/Buttons/alerts_hover.png') no-repeat;
+}
+div.btnMedicalTracker {
+	background: transparent url('../img/Buttons/medicalTracker.png') no-repeat;
+}
+div.btnMedicalTracker:hover {
+	background: transparent url('../img/Buttons/medicalTracker_hover.png') no-repeat;
+}
+div.btnKidTracker {
+	background: transparent url('../img/Buttons/kidTracker.png') no-repeat;
+}
+div.btnKidTracker:hover {
+	background: transparent url('../img/Buttons/kidTracker_hover.png') no-repeat;
+}
+div.btnCarTracker {
+	background: transparent url('../img/Buttons/carTracker.png') no-repeat;
+}
+div.btnCarTracker:hover {
+	background: transparent url('../img/Buttons/carTracker_hover.png') no-repeat;
+}
+
+div.btnPetTracker {
+	background: transparent url('../img/Buttons/petTracker.png') no-repeat;
+}
+div.btnPetTracker:hover {
+	background: transparent url('../img/Buttons/petTracker_hover.png') no-repeat;
+}
+
+div.btnHomeSecurity{
+	background: transparent url('../img/Buttons/homeSecurity.png') no-repeat;
+}
+div.btnHomeSecurity:hover {
+	background: transparent url('../img/Buttons/homeSecurity_hover.png') no-repeat;
+}
+
+/** |- Properties */
+div.btnProperties {
+	background: transparent url('../img/Buttons/settings.png') no-repeat;
+}
+div.btnProperties:hover {
+	background: transparent url('../img/Buttons/settings_hover.png') no-repeat;
+}
+
+div.btnToolBullsEye {
+	background: transparent url('../img/Buttons/bullsEye.png') no-repeat;
+}
+div.btnToolCircle {
+	background: transparent url('../img/Buttons/circle.png') no-repeat;
+}
+div.btnToolPolygon {
+	background: transparent url('../img/Buttons/polygon.png') no-repeat;
+}
+div.deviceList {
+	min-height: 544px;
+	min-width: 56px;
+}
+
+#map_canvas {
+	/*height: 710px;*/
+	/*height: 690px;*/
+	height: 656px;
+	/*position: relative;*/
+	width: 740px;
+	/*display: inline;*/
+	float: right;
+	background-color: cyan;
+}
+
+#devOptions {
+	display: inline;
+	float: right;
+}
+div.toolsMenu {
+	width: 964px;
+	height: 54px;
+	background-color: #9acd32; /** yellowgreen */
+	/*position: relative;*/
+	float: left;
+}
+div.menuGps {
+	background-color: beige;
+	width: 220px;
+	height: 656px;
+	display: initial;
+	float: left;
+	padding: 5px;
+	box-sizing:border-box;
+	-moz-box-sizing:border-box; /* Firefox */
+	-webkit-box-sizing:border-box; /* Safari */}
+
+/** Events Table. */
+table.listTable {
+	border-collapse: collapse;
+	width: 100%;
+	/*display: inline-table;*/
+	/*padding: 10px 5px;*/
+	/*margin: 10px 5px;*/
+	/*clear: both;*/
+}
+div.menuGps th {
+	font-size: 12px;
+	font-family: Arial;
+}
+div.menuGps tr.trNormal, div.menuGps tr.trAlt {
+	font-size: 11px;
+	font-family: helvetica;
+	border: solid 1px;
+}
+
+div.menuGps tr.trNormal td, div.menuGps tr.trAlt td {
+	border: solid 1px;
+}
+
+div.menuGps tr.trNormal {
+	background-color: #87cefa;
+}
+div.menuGps tr.trAlt {
+	background-color: #b0c4de;
+}
+
+div.menuGps td.rowPointer {
+	background-image: url('../img/rowPointer.png');
+	background-repeat: no-repeat;
+	min-width: 3px;
+	min-height: 34px;
+}
+td.rowSpacer {
+	min-height: 2px;
+	background-color: black;
+}
