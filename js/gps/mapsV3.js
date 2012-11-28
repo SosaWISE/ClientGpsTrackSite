@@ -456,45 +456,60 @@ SOS.Gps.Maps = (function ()
 		, PaintMarker: function (param)
 		{
 			/** Initialize. */
-			var iconOriginPoint = new google.maps.Point(0,0);
+			//var iconOriginPoint = new google.maps.Point(0,0);
+			var iconPath = "";
 			switch(param.EventTypeId)
 			{
 				case "EMERG":
-					iconOriginPoint = new google.maps.Point(0,0);
+					//iconOriginPoint = new google.maps.Point(0,0);
+					iconPath = "/images/AlertBubble_Medical.png";
 					break;
 				case "FALL":
-					iconOriginPoint = new google.maps.Point(33,0);
+					//iconOriginPoint = new google.maps.Point(33,0);
+					iconPath = "/images/AlertBubble_GSensor.png";
 					break;
 				case "FENCE":
-					iconOriginPoint = new google.maps.Point(97,0);
+					//iconOriginPoint = new google.maps.Point(97,0);
+					iconPath = "/images/AlertBubble_GeoFenceExit.png";
 					break;
 				case "FENCE_RT":
-					iconOriginPoint = new google.maps.Point(65,0);
+					//iconOriginPoint = new google.maps.Point(65,0);
+					iconPath = "/images/AlertBubble_GeoFenceEnter.png";
 					break;
 				case "LOWBAT":
-					iconOriginPoint = new google.maps.Point(161,0);
+					//iconOriginPoint = new google.maps.Point(161,0);
+					iconPath = "/images/AlertBubble_LowBattery.png";
 					break;
 				case "MEDICAL":
-					iconOriginPoint = new google.maps.Point(0,0);
+					//iconOriginPoint = new google.maps.Point(0,0);
+					iconPath = "/images/AlertBubble_Medical.png";
 					break;
 				case "SPEED":
-					iconOriginPoint = new google.maps.Point(129,0);
+					//iconOriginPoint = new google.maps.Point(129,0);
+					iconPath = "/images/AlertBubble_Speed.png";
 					break;
 				case "TAMPER":
-					iconOriginPoint = new google.maps.Point(193,0);
+					//iconOriginPoint = new google.maps.Point(193,0);
+					iconPath = "/images/AlertBubble_Tamper.png";
 					break;
 			}
 
+			debugger;
+			var iconMarker = new google.maps.MarkerImage('http://sos.clientgpstracksite.local' + iconPath
+			, new google.maps.Size(32,37, 'px', 'px'));
+			var oPos = new google.maps.LatLng(param.Lattitude, param.Longitude);
 			var options = {
-				animation: google.maps.Animation.DROP
-				, position: new google.maps.LatLng(param.Lattitude, param.Longitude)
-				, icon: {
-					origin: iconOriginPoint
-					, url: '/images/GoogleIconSprit.png'
-					, size: new google.maps.Size(32, 37)
-				}
-				, flat: false // This shows the icon shadow
-				, map: _currentMap
+//				animation: google.maps.Animation.DROP
+				position: oPos
+//				, icon: iconMarker
+//				, icon: iconPath
+//				, icon: {
+//					origin: iconOriginPoint
+//					, url: '/images/GoogleIconSprit.png'
+//					, size: new google.maps.Size(32, 37)
+//				}
+//				, flat: false // This shows the icon shadow
+//				, map: _currentMap
 				, title: '(' + param.EventID + ')' + param.EventName
 //				, shadow: {
 //					anchor: new google.maps.Point(20,50)
@@ -502,9 +517,10 @@ SOS.Gps.Maps = (function ()
 //					, url: '/images/GoogleIconSprit.png'
 //					, size: new google.maps.Size(47, 38)
 //				}
-				, visible: true
+//				, visible: true
 			};
 			var marker = new google.maps.Marker(options);
+			marker.setMap(_currentMap);
 		}
 
 		/** START MEMBER Variables. */
