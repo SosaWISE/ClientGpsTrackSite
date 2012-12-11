@@ -579,4 +579,47 @@ Ext.define("SOS.Services.ClientGpsTrack",
 			, failure: fxFailure
 		});
 	}
+
+	, RequestDeviceLocation: function (params, afxSuccess, afxFailure)
+	{
+		/** Initialize. */
+		var oData = {};
+		function fxSuccess(oResponse) { if (afxSuccess) afxSuccess(oResponse); }
+		function fxFailure(oResponse) { if (afxFailure) afxFailure(oResponse); }
+
+		/** Check Arguments. */
+		if (params === undefined)
+		{
+			alert("Please pass params argument.");
+			return;
+		}
+		if (params.AccountID === undefined)
+		{
+			alert("Please pass the AccountID of the device requesting location.");
+			return;
+		}
+		if (params.UnitID === undefined)
+		{
+			alert("Please pass the UnitID of the device requesting location.");
+			return;
+		}
+
+		/** Setup the data argumnet. */
+		oData.lAccountID = params.AccountID;
+		oData.lUnitID = params.UnitID;
+		var sJson = JSON.stringify(oData);
+
+		/** Execute query. */
+		return $.ajax({
+			url: SOS.Config.ClientGpsTrackSrvUrl() + "GetLaipacS911CurrentLocation"
+			, data: sJson
+			, type: "POST"
+			, dataType: "json"
+			, crossDomain: true
+			, xhrFields: { withCredentials: true }
+			, contentType: 'application/json'
+			, success: fxSuccess
+			, failure: fxFailure
+		});
+	}
 });
