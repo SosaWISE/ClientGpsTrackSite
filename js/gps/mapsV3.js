@@ -54,6 +54,7 @@ SOS.Gps.Maps = (function ()
 			/** Bind actions to events on toolbar. */
 			SOS.Views.GeoToolbar.OnClickSaveGeometries(this.SaveGeometries);
 			SOS.Views.GeoToolbar.OnNewGeoFenceClickEvent(this.NewGeoFence);
+			SOS.Views.GeoToolbar.OnLocateDeviceClickEvent(this.LocateDevice);
 		}
 
 		, CenterMapFromAddress: function (street, city, state, zip)
@@ -324,7 +325,7 @@ SOS.Gps.Maps = (function ()
 				alert("Failure on saving Point.");
 			}
 
-			debugger;
+			//debugger;
 			/** Create params. */
 			var pointNE = fenceItem.Geometry.getBounds().getNorthEast();
 			var pointSW = fenceItem.Geometry.getBounds().getSouthWest();
@@ -417,7 +418,7 @@ SOS.Gps.Maps = (function ()
 			}
 
 			/** Initialize. */
-			debugger;
+			//debugger;
 			var itemId = _getNumberOfFences() ? 0 - _fenceHashTable.length : 0;
 
 			/** Get center of the map. */
@@ -458,6 +459,7 @@ SOS.Gps.Maps = (function ()
 			/** Initialize. */
 			//var iconOriginPoint = new google.maps.Point(0,0);
 			var iconPath = "";
+			var iconSize = new google.maps.Size(32,37, 'px', 'px');
 			switch(param.EventTypeId)
 			{
 				case "EMERG":
@@ -492,16 +494,21 @@ SOS.Gps.Maps = (function ()
 					//iconOriginPoint = new google.maps.Point(193,0);
 					iconPath = "/images/AlertBubble_Tamper.png";
 					break;
+				case "CURRENT_POS":
+					iconPath = "/images/AlertBubble_CurrentPos.png";
+					iconSize = new google.maps.Size(32,40, 'px', 'px');
+					break;
 			}
 
-			debugger;
-			var iconMarker = new google.maps.MarkerImage('http://sos.clientgpstracksite.local' + iconPath
-			, new google.maps.Size(32,37, 'px', 'px'));
+			//debugger;
+			var iconMarker = new google.maps.MarkerImage(SOS.Config.CurrentURL + iconPath
+			, iconSize);
+/** This is very strange.  THis should change the GIT. */
 			var oPos = new google.maps.LatLng(param.Lattitude, param.Longitude);
 			var options = {
 //				animation: google.maps.Animation.DROP
 				position: oPos
-//				, icon: iconMarker
+				, icon: iconMarker
 //				, icon: iconPath
 //				, icon: {
 //					origin: iconOriginPoint
@@ -521,6 +528,46 @@ SOS.Gps.Maps = (function ()
 			};
 			var marker = new google.maps.Marker(options);
 			marker.setMap(_currentMap);
+		}
+
+		, LocateDevice: function()
+		{
+			/** Initialize. */
+			var oDevice = SOS.Controllers.Devices.DeviceList[SOS.Controllers.Devices.AccountID];
+			function fxSuccess (response)
+			{
+				/** Check for a successful response. */
+				if (response.Code !== 0)
+				{
+					alert("Locate Device Error:" + response.Message);
+					return;
+				}
+				/** Create a position marker. */
+				console.log("Locate Device Response: ", response);
+				//alert("Locate was successfull");
+				SOS.Gps.Maps.PaintMarker({
+					EventTypeId: "CURRENT_POS",
+					Lattitude: response.Value.Lattitude,
+					Longitude: response.Value.Longitude,
+					EventID: 0,
+					EventName: response.Value.PlaceName
+				});
+				/** Pan to location. */
+				var latlng = new google.maps.LatLng(response.Value.Lattitude, response.Value.Longitude);
+				SOS.Gps.Maps.CurrentMap.panTo(latlng);
+			}
+			function fxFailure (response){
+				console.log("Locate Device Response Failure: ", response);
+				alert("Locate Device Failed");
+			}
+			/** Create params. */
+			var params = {
+				AccountID: oDevice.AccountId,
+				UnitID: oDevice.UnitID
+			};
+
+			/** Return hdr handler. */
+			return SOS.Services.ClientGpsTrack.RequestDeviceLocation(params, fxSuccess, fxFailure);
 		}
 
 		/** START MEMBER Variables. */
