@@ -332,6 +332,7 @@ SOS.Gps.Maps = (function ()
 			var params = {
 				GeoFenceID: fenceItem.GeoFenceID
 				, AccountId: SOS.Controllers.Devices.AccountID
+				, ItemId: SOS.Controllers.Devices.DeviceList[SOS.Controllers.Devices.AccountID].InvItemId
 				, MaxLattitude: pointNE.lat()
 				, MaxLongitude: pointNE.lng()
 				, MinLattitude: pointSW.lat()

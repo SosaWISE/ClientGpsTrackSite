@@ -560,10 +560,14 @@ Ext.define("SOS.Services.ClientGpsTrack",
 		/** Setup the data argument. */
 		oData.lGeoFenceID = params.GeoFenceID;
 		oData.lAccountId = params.AccountId;
+		oData.sItemId = params.InvItemId;
+		if (params.geoFenceName) oData.sGeoFenceName = params.geoFenceName;
+		if (params.geoFenceDescription) oData.sGeoFenceDescription = params.geoFenceDescription;
 		oData.dMaxLattitude = params.MaxLattitude;
 		oData.dMinLongitude = params.MinLongitude;
 		oData.dMaxLongitude = params.MaxLongitude;
 		oData.dMinLattitude = params.MinLattitude;
+
 		var sJson = JSON.stringify(oData);
 
 		/** Execute query. */
@@ -612,6 +616,42 @@ Ext.define("SOS.Services.ClientGpsTrack",
 		/** Execute query. */
 		return $.ajax({
 			url: SOS.Config.ClientGpsTrackSrvUrl() + "GetLaipacS911CurrentLocation"
+			, data: sJson
+			, type: "POST"
+			, dataType: "json"
+			, crossDomain: true
+			, xhrFields: { withCredentials: true }
+			, contentType: 'application/json'
+			, success: fxSuccess
+			, failure: fxFailure
+		});
+	}
+	, RequestLaipacS911GeoFences: function (params, afxSuccess, afxFailure)
+	{
+		/** Initialize. */
+		var oData = {};
+		function fxSuccess(oResponse) { if (afxSuccess) afxSuccess(oResponse); }
+		function fxFailure(oResponse) { if (afxFailure) afxFailure(oResponse); }
+
+		/** Check Arguments. */
+		if (params === undefined)
+		{
+			alert("Please pass params argument.");
+			return;
+		}
+		if (params.AccountID === undefined)
+		{
+			alert("Please pass the AccountID of the device requesting location.");
+			return;
+		}
+
+		/** Setup the data argumnet. */
+		oData.lAccountID = params.AccountID;
+		var sJson = JSON.stringify(oData);
+
+		/** Execute query. */
+		return $.ajax({
+			url: SOS.Config.ClientGpsTrackSrvUrl() + "GetLaipacS911GeoFences"
 			, data: sJson
 			, type: "POST"
 			, dataType: "json"
