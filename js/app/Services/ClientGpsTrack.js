@@ -560,7 +560,8 @@ Ext.define("SOS.Services.ClientGpsTrack",
 		/** Setup the data argument. */
 		oData.lGeoFenceID = params.GeoFenceID;
 		oData.lAccountId = params.AccountId;
-		oData.sItemId = params.InvItemId;
+		oData.sItemId = params.ItemId;
+		oData.sReportMode = params.ReportMode;
 		if (params.geoFenceName) oData.sGeoFenceName = params.geoFenceName;
 		if (params.geoFenceDescription) oData.sGeoFenceDescription = params.geoFenceDescription;
 		oData.dMaxLattitude = params.MaxLattitude;

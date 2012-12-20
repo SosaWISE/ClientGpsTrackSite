@@ -329,10 +329,12 @@ SOS.Gps.Maps = (function ()
 			/** Create params. */
 			var pointNE = fenceItem.Geometry.getBounds().getNorthEast();
 			var pointSW = fenceItem.Geometry.getBounds().getSouthWest();
+			debugger;
 			var params = {
-				GeoFenceID: fenceItem.GeoFenceID
+				GeoFenceID: isNaN(fenceItem.GeoFenceID) ? 0 : fenceItem.GeoFenceID
 				, AccountId: SOS.Controllers.Devices.AccountID
 				, ItemId: SOS.Controllers.Devices.DeviceList[SOS.Controllers.Devices.AccountID].InvItemId
+				, ReportMode: '3'
 				, MaxLattitude: pointNE.lat()
 				, MaxLongitude: pointNE.lng()
 				, MinLattitude: pointSW.lat()
